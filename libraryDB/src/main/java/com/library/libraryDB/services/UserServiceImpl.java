@@ -1,10 +1,10 @@
-package services;
+package com.library.libraryDB.services;
 
+import com.library.libraryDB.entities.User;
+import com.library.libraryDB.repositories.UserRepository;
 import com.mongodb.MongoException;
-import entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.UserRepository;
 
 import java.util.List;
 

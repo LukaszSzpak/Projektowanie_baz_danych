@@ -1,6 +1,6 @@
-package repositories;
+package com.library.libraryDB.repositories;
 
-import entities.User;
+import com.library.libraryDB.entities.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

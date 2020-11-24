@@ -1,6 +1,6 @@
-package services;
+package com.library.libraryDB.services;
 
-import entities.User;
+import com.library.libraryDB.entities.User;
 
 import java.util.List;
 

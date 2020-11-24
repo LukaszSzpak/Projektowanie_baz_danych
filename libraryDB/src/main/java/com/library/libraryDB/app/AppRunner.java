@@ -1,6 +1,6 @@
-package app;
+package com.library.libraryDB.app;
 
-import entities.User;
+import com.library.libraryDB.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

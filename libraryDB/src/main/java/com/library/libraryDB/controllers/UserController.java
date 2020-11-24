@@ -1,11 +1,11 @@
-package controllers;
+package com.library.libraryDB.controllers;
 
-import entities.User;
+import com.library.libraryDB.entities.User;
+import com.library.libraryDB.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import services.UserService;
 
 import java.util.List;
 

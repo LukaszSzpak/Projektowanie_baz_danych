@@ -1,4 +1,4 @@
-package entities;
+package com.library.libraryDB.entities;
 
 
 import java.util.List;
@@ -28,6 +28,8 @@ public class User {
     private String email;
     private String password;
     private List<String> wishList;
+
+    public User() { }
 
     public User(String id, String name, String surname, String email, String password){
         this.id = id;

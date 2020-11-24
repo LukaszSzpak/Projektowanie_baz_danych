@@ -1,4 +1,4 @@
-package entities;
+package com.library.libraryDB.entities;
 
 public class Employee {
     /*
