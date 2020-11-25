@@ -18,7 +18,7 @@ public class AppRunner implements CommandLineRunner {
         System.out.println("Collection Exists? " + mongoTemplate.collectionExists("user"));
         System.out.println("Collection Exists? " + mongoTemplate.collectionExists("library"));
 
-        User newUser = new User("1", "Lukas", "Szpak", "alukasz1@interia.pl", "hash");
+        User newUser = new User("Lukas", "Szpak", "alukasz1@interia.pl", "hash");
         mongoTemplate.save(newUser, "user");
     }
 }
