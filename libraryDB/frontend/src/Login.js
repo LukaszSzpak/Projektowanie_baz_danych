@@ -8,11 +8,11 @@ export default function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
 
     let userRole;
 
-    function handleLogin(event) {
-        event.preventDefault();
+    function handleLogin() {
         fetch(`/api/account?email=${email}&password=${password}`)
             .then(
                 response => {
@@ -25,6 +25,9 @@ export default function Login() {
                     else {
                         alert("Incorrect credentials");
                     }
+                    return response.ok;
+            }).catch(error =>{
+                alert("Incorrect credentials");
             })
     }
 
@@ -36,7 +39,7 @@ export default function Login() {
             alignItems="center"
             >
             <div>
-                <form onSubmit={handleLogin}>
+                <form>
                     <Grid item xs={12}>
                         <TextField id="email-input" label="email" onInput={ e =>setEmail(e.target.value)} />
                     </Grid>
@@ -45,7 +48,9 @@ export default function Login() {
                     </Grid>
                     <roleContext.Provider value={userRole}>
                         <Grid item xs={12}>
-                            <Button type="submit" component={Link} to={'/'} variant="contained" size="large" color="primary">Login</Button>
+                            <Link to={handleLogin() ? '/' : '#'}>  
+                                <Button type="submit" variant="contained" size="large" color="primary">Login</Button>
+                            </Link>  
                         </Grid>
                     </roleContext.Provider>
                     <roleContext.Provider value={roles.USER}>
