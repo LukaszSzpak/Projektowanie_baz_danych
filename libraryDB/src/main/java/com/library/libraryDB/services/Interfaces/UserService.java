@@ -5,9 +5,9 @@ import com.library.libraryDB.entities.User;
 import java.util.List;
 
 public interface UserService {
-    public User getUserById(String id);
+    public User getUserById(String email);
     public User createUser(User user);
-    public User updateUser(User user, String id);
-    public User deleteUser(String id);
+    public User updateUser(User user, String email);
+    public boolean deleteUser(String email);
     public List<User> getAllUsers();
 }

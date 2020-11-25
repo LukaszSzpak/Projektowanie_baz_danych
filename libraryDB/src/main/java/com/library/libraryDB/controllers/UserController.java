@@ -1,13 +1,13 @@
 package com.library.libraryDB.controllers;
 
 import com.library.libraryDB.entities.User;
-import com.library.libraryDB.services.AccountService;
-import com.library.libraryDB.services.UserService;
+import com.library.libraryDB.services.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 @RestController
@@ -17,10 +17,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/user/{id}")
+    @GetMapping(value = "/user/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> getUser(@PathVariable(value = "id") String id) {
-        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
+    public ResponseEntity<User> getUser(@PathVariable(value = "email") String email) {
+        User user = userService.getUserById(email);
+
+        if (user != null)
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(user, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(value = "/users")
@@ -32,20 +37,30 @@ public class UserController {
     @PostMapping(value = "/user")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        return new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
+        User resultUser = userService.createUser(user);
+
+        if (resultUser != null)
+            return new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/user/{id}")
+    @PutMapping(value = "/user/{email}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> updateUser(@RequestBody User user,
-                                           @PathVariable(value = "id") String id) {
-        return new ResponseEntity<>(userService.updateUser(user, id), HttpStatus.OK);
+                                           @PathVariable(value = "email") String email) {
+        User resultUser = userService.updateUser(user, email);
+
+        if (resultUser != null)
+            return new ResponseEntity<>(resultUser, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(value = "/user/{id}")
+    @DeleteMapping(value = "/user/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> deleteUser(@PathVariable(value = "id") String id) {
-        return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
+    public ResponseEntity<Boolean> deleteUser(@PathVariable(value = "email") String email) {
+        if (userService.deleteUser(email))
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
 

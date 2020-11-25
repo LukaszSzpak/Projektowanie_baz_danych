@@ -3,7 +3,6 @@ package com.library.libraryDB.services;
 import com.library.libraryDB.entities.User;
 import com.library.libraryDB.repositories.UserRepository;
 import com.library.libraryDB.services.Interfaces.UserService;
-import com.mongodb.MongoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,27 +15,41 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User getUserById(String id) {
-        if(userRepository.findById(id).isPresent())
-            return userRepository.findById(id).get();
+    public User getUserById(String email) {
+        if(userRepository.findById(email).isPresent())
+            return userRepository.findById(email).get();
         else
-            throw new MongoException("Record not Found");
+            return null;
     }
 
     @Override
     public User createUser(User user) {
+        for (User tempUser: userRepository.findAll()) {
+            if (tempUser.getEmail().equals(user.getEmail()))
+                return null;
+        }
         userRepository.save(user);
         return user;
     }
 
     @Override
-    public User updateUser(User user, String id) {
+    public User updateUser(User user, String email) {
+        if(userRepository.findById(email).isPresent()) {
+            userRepository.findById(email).get().setName(user.getName());
+            userRepository.findById(email).get().setSurname(user.getSurname());
+            userRepository.findById(email).get().setPassword(user.getPassword());
+            return userRepository.findById(email).get();
+        }
         return null;
     }
 
     @Override
-    public User deleteUser(String id) {
-        return null;
+    public boolean deleteUser(String email) {
+        if(userRepository.findById(email).isPresent()) {
+            userRepository.deleteById(email);
+            return true;
+        }
+        return false;
     }
 
     @Override
