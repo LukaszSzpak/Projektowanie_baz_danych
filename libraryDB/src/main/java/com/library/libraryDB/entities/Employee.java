@@ -17,12 +17,14 @@ public class Employee {
     private String name;
     private String surname;
     private String role;
+    private String password;
 
-    public Employee(String email, String name, String surname, String role) {
+    public Employee(String email, String name, String surname, String role, String password) {
         this.email = email;
         this.name = name;
         this.surname = surname;
         this.role = role;
+        this.password = password;
     }
 
     public Employee() {
@@ -46,5 +48,17 @@ public class Employee {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 }
