@@ -2,7 +2,7 @@ import { Select, Grid, TextField, Button, FormControl, InputLabel, MenuItem } fr
 import { useContext, useState } from "react";
 import { roleContext } from "./RoleContext"
 import { roles } from "./Roles"
-import {useHistory} from "react-router-dom";
+import {useHistory, Link} from "react-router-dom";
 
 
 export default function Register() {
@@ -17,7 +17,6 @@ export default function Register() {
     const userRole = useContext(roleContext);
 
     function handleRegistration(event) {
-        event.preventDefault();
 
         let requestBody = {
             name: name,
@@ -36,10 +35,7 @@ export default function Register() {
             method: "POST",
             body: requestBody
         }).then(response =>{
-            if(!response.ok){
-                let okRegistrationReturnPath = userRole.normalize() === roles.USER ? '/login' : '/'; 
-                history.push(okRegistrationReturnPath);
-            }
+            return response.ok;
         })
     }
 
@@ -80,7 +76,7 @@ export default function Register() {
             alignItems="center"
             >
             <div>
-                <form onSubmit={handleRegistration}>
+                <form>
                     <Grid item xs={12}>
                         <TextField id="name-input" label="name" onInput={ e =>setName(e.target.value)} />
                     </Grid>
@@ -95,7 +91,9 @@ export default function Register() {
                     </Grid>
                     {AdminRolePanel}
                     <Grid item xs={12}>
-                        <Button type="submit" variant="contained" size="large" color="primary">Register</Button>
+                        <Link to={handleRegistration() ? '/' : '#'}>
+                            <Button variant="contained" size="large" color="primary">Register</Button>
+                        </Link>
                     </Grid>
                 </form>
             </div>

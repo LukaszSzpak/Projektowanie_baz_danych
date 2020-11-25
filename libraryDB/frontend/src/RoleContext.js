@@ -1,3 +1,3 @@
 import {createContext} from 'react';
 
-export const roleContext = createContext('user');
+export const roleContext = createContext('');

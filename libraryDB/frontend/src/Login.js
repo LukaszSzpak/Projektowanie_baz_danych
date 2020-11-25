@@ -26,8 +26,6 @@ export default function Login() {
                         alert("Incorrect credentials");
                     }
                     return response.ok;
-            }).catch(error =>{
-                alert("Incorrect credentials");
             })
     }
 
@@ -49,7 +47,7 @@ export default function Login() {
                     <roleContext.Provider value={userRole}>
                         <Grid item xs={12}>
                             <Link to={handleLogin() ? '/' : '#'}>  
-                                <Button type="submit" variant="contained" size="large" color="primary">Login</Button>
+                                <Button variant="contained" size="large" color="primary">Login</Button>
                             </Link>  
                         </Grid>
                     </roleContext.Provider>

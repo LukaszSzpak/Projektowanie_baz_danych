@@ -8,17 +8,19 @@ export default function App() {
 
   return (
     <div className="App">
-      <Switch>
-          <Route path='/login'>
-            <Login/>
-          </Route>
-          <Route path='/register'>
-            <Register/>
-          </Route>
-          <Route path='/'>
-            <p>MAIN</p>
-          </Route>
-      </Switch>
+      <roleContext value="user">
+        <Switch>
+            <Route path='/login'>
+              <Login/>
+            </Route>
+            <Route path='/register'>
+              <Register/>
+            </Route>
+            <Route path='/'>
+              <p>MAIN</p>
+            </Route>
+        </Switch>
+      </roleContext>
     </div>
   );
 }
