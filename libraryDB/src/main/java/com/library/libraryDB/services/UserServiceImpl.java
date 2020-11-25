@@ -2,6 +2,7 @@ package com.library.libraryDB.services;
 
 import com.library.libraryDB.entities.User;
 import com.library.libraryDB.repositories.UserRepository;
+import com.library.libraryDB.services.Interfaces.UserService;
 import com.mongodb.MongoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

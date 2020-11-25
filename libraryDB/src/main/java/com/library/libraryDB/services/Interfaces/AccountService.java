@@ -1,4 +1,4 @@
-package com.library.libraryDB.services;
+package com.library.libraryDB.services.Interfaces;
 
 import com.library.libraryDB.entities.User;
 

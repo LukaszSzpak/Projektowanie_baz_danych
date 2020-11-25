@@ -2,13 +2,14 @@ package com.library.libraryDB.services;
 
 import com.library.libraryDB.entities.User;
 import com.library.libraryDB.repositories.UserRepository;
+import com.library.libraryDB.services.Interfaces.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private UserRepository userRepository;
