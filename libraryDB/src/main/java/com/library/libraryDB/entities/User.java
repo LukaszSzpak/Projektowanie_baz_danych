@@ -12,9 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="user")
 public class User {
     /*
+    email - string - id
     name - string
     surname - string
-    email - string
     password - string
     wish_list - List<String> (Book_Id)
      */
