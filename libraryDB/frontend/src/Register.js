@@ -2,6 +2,7 @@ import { Select, Grid, TextField, Button, FormControl, InputLabel, MenuItem } fr
 import { useContext, useState } from "react";
 import { roleContext } from "./RoleContext"
 import { roles } from "./Roles"
+import {useHistory} from "react-router-dom";
 
 
 export default function Register() {
@@ -12,6 +13,7 @@ export default function Register() {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
 
+    const history = useHistory();
     const userRole = useContext(roleContext);
 
     function handleRegistration(event) {
@@ -24,6 +26,8 @@ export default function Register() {
             password: password,
         }
 
+                    console.log(userRole);
+
         if(userRole.normalize() === roles.ADMIN.normalize()){
             requestBody.role = role;
         }
@@ -32,8 +36,9 @@ export default function Register() {
             method: "POST",
             body: requestBody
         }).then(response =>{
-            if(response.ok){
-
+            if(!response.ok){
+                let okRegistrationReturnPath = userRole.normalize() === roles.USER ? '/login' : '/'; 
+                history.push(okRegistrationReturnPath);
             }
         })
     }
