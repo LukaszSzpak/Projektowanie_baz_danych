@@ -34,7 +34,11 @@ export default function Register() {
 
         fetch('/api/user', {
             method: "POST",
-            body: requestBody
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
         }).then(response =>{
             if(!response.ok){
                 let okRegistrationReturnPath = userRole.normalize() === roles.USER ? '/login' : '/'; 
