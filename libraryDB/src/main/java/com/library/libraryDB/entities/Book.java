@@ -22,7 +22,7 @@ public class Book {
     private String author;
     private String description;
     private boolean available;
-    private List<Item> itemList;
+    private List<String> itemList;
 
     public Book() {
     }
@@ -54,7 +54,7 @@ public class Book {
         return available;
     }
 
-    public List<Item> getItemList() {
+    public List<String> getItemList() {
         return itemList;
     }
 
@@ -74,11 +74,11 @@ public class Book {
         this.available = available;
     }
 
-    public void setItemList(List<Item> itemList) {
+    public void setItemList(List<String> itemList) {
         this.itemList = itemList;
     }
 
-    public Item getItemFromList(int position) {
+    public String getItemFromList(int position) {
         try {
             return this.itemList.get(position);
         } catch (Exception e) {
@@ -87,11 +87,11 @@ public class Book {
 
     }
 
-    public void addItemToList(Item item) {
+    public void addItemToList(String item) {
         this.itemList.add(item);
     }
 
-    public boolean deleteItemFromList(Item item) {
+    public boolean deleteItemFromList(String item) {
         try {
             this.itemList.remove(item);
             return true;
