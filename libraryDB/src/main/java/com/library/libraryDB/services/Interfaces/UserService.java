@@ -10,4 +10,5 @@ public interface UserService {
     public User updateUser(User user, String email);
     public boolean deleteUser(String email);
     public List<User> getAllUsers();
+    public User addBookToWishList(User user, String bookId);
 }

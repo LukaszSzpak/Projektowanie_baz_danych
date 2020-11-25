@@ -1,6 +1,7 @@
 package com.library.libraryDB.services;
 
 import com.library.libraryDB.entities.User;
+import com.library.libraryDB.repositories.BookRepository;
 import com.library.libraryDB.repositories.UserRepository;
 import com.library.libraryDB.services.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
     @Override
     public User getUserById(String email) {
@@ -35,17 +38,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(User user, String email) {
         if(userRepository.findById(email).isPresent()) {
-            userRepository.findById(email).get().setName(user.getName());
-            userRepository.findById(email).get().setSurname(user.getSurname());
-            userRepository.findById(email).get().setPassword(user.getPassword());
-            return userRepository.findById(email).get();
+            User resultUser = userRepository.findById(email).get();
+            resultUser.setName(user.getName());
+            resultUser.setSurname(user.getSurname());
+            resultUser.setPassword(user.getPassword());
+            userRepository.save(resultUser);
+            return resultUser;
         }
         return null;
     }
 
     @Override
     public boolean deleteUser(String email) {
-        if(userRepository.findById(email).isPresent()) {
+        if (userRepository.findById(email).isPresent()) {
             userRepository.deleteById(email);
             return true;
         }
@@ -55,5 +60,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User addBookToWishList(User user, String bookId) {
+        if (bookRepository.findById(bookId).isPresent() && userRepository.findById(user.getEmail()).isPresent()) {
+            User resultUser = userRepository.findById(user.getEmail()).get();
+            resultUser.addToWishList(bookId);
+            return resultUser;
+        }
+        return null;
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 @RestController
@@ -25,7 +24,7 @@ public class UserController {
         if (user != null)
             return new ResponseEntity<>(user, HttpStatus.OK);
         else
-            return new ResponseEntity<>(user, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(value = "/users")
@@ -63,5 +62,26 @@ public class UserController {
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping(value = "/user/addBook?bookId={bookId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<User> addBookToWishList(@PathVariable(value = "bookId") String bookId,
+                                                  @RequestBody User user) {
+        User resultUser = userService.addBookToWishList(user, bookId);
+
+        if (resultUser != null)
+            return new ResponseEntity<>(resultUser, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/user/getWishList?user={email}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<String>> getWishList(@PathVariable(value = "email") String email) {
+        User resultUser = userService.getUserById(email);
+
+        if (resultUser != null)
+            return new ResponseEntity<>(resultUser.getWishList(), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
 
 }
