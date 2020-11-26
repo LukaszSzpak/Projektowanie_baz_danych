@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Piotr",
+        "surname": "Bobel",
+        "email": "piotrreewfwwfe@.pl"
+    },
+    {
+        "id": 2,
+        "name": "Jan",
+        "surname": "Kowalski",
+        "email": "napewnoniepiotrek@.pl"
+    },
+    {
+        "id": 3,
+        "name": "Janusz",
+        "surname": "Kowal",
+        "email": "jankow@.pl"
+    },
+    {
+        "id": 4,
+        "name": "Mateusz",
+        "surname": "Mateusz",
+        "email": "matimati@.pl"
+    }
+]

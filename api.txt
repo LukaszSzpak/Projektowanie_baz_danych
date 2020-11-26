@@ -1,0 +1,109 @@
+/***            USER            ***/
+GET /api/user/{email} -> zwrócenie klienta z danym emailem
+       TO FRONT-END
+            email - string - id
+            name - string
+            surname - string
+            password - string
+            wish_list - List<String> (Book_Id)
+
+GET /api/users -> zwrócenie listy klientow
+        TO FRONT-END
+            lista wszystkich userów - List<User>
+
+POST /api/user -> tworzy klienta
+        TO AND FROM FRONT-END
+            email - string - id
+            name - string
+            surname - string
+            password - string
+            wish_list - List<String> (Book_Id)
+
+PUT /api/user/{email} -> updateuje klienta
+        TO AND FROM FRONT-END
+            email - string - id
+            name - string
+            surname - string
+            password - string
+            wish_list - List<String> (Book_Id)
+
+DELETE /api/user/{email} -> usuwa klienta pod danym emailem
+        TO FRONT-END
+            true / false
+
+GET /api/user/getWishList?user={email} -> zwraca wishList klienta
+        TO FRONT-END
+            wysh_list - List<String> - lista identyfikatorów książek
+
+
+
+/***            ITEM            ***/
+
+GET /api/item/{id} -> zwraca Item z danym id
+        TO FRONT-END:
+            id: <String>
+            avaliable: <bool>
+            publishHouse: <String>
+            condiiton: <String>
+
+POST /api/item/ -> zwraca gotowy Item
+        FROM FRONT-END:
+            publishHouse: <String>
+            condiiton: <String>
+
+        TO FRONT-END:
+            id: <String>
+            avaliable: <bool>
+            publishHouse: <String>
+            condiiton: <String>
+
+PUT /api/item/{id} -> update Item
+        TO AND FROM FRONT-END:
+            id: <String>
+            avaliable: <bool>
+            publishHouse: <String>
+            condiiton: <String>
+
+
+
+/***        ACCOUNT     ***/
+
+GET /api/account?email={email}&password={password} -> zwraca dane konta z podanym loginem i hasłem
+        TO FRONT-END
+            email - string - id
+            name - string
+            surname - string
+            password - string
+            wish_list - List<String> (Book_Id) (w przypadku User)
+            role - string [24] {librarian, admin} (w przypadku Employee)
+
+
+
+/***        EMPLOYEE        ***/
+
+GET /api/employee/{email} -> zwraca pracownika z danym emailem
+        TO FRONT-END
+            email - string - id
+            name - string
+            surname - string
+            password - string
+            role - string [24] {librarian, admin}
+
+PUT /api/employee/{email} -> update pracownika z danym emailem
+        TO AND FROM FRONT-END
+            email - string - id
+            name - string
+            surname - string
+            password - string
+            role - string [24] {librarian, admin}
+
+
+POST /api/employee/ -> utworzenie pracownika
+        TO AND FROM FRONT-END
+            email - string - id
+            name - string
+            surname - string
+            password - string
+            role - string [24] {librarian, admin}
+
+DELETE /api/employee/{email} -> usuwa pracownika pod tym emailem
