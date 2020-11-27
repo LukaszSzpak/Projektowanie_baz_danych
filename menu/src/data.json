@@ -1,26 +1,34 @@
+{
+"books":
 [
     {
         "id": 1,
-        "name": "Piotr",
-        "surname": "Bobel",
-        "email": "piotrreewfwwfe@.pl"
+        "title": "Piotr",
+        "author": "Bobel",
+        "category": "piotrreewfwwfe@.pl"
     },
     {
         "id": 2,
-        "name": "Jan",
-        "surname": "Kowalski",
-        "email": "napewnoniepiotrek@.pl"
+        "title": "Jan",
+        "author": "Kowalski",
+        "category": "napewnoniepiotrek@.pl"
     },
     {
         "id": 3,
-        "name": "Janusz",
-        "surname": "Kowal",
-        "email": "jankow@.pl"
+        "title": "Janusz",
+        "author": "Kowal",
+        "category": "jankow@.pl"
     },
     {
         "id": 4,
-        "name": "Mateusz",
-        "surname": "Mateusz",
-        "email": "matimati@.pl"
+        "title": "Mateusz",
+        "author": "Mateusz",
+        "category": "matimati@.pl"
+    },
+    {
+        "id": 4,
+        "title": "Mateusz",
+        "author": "Mateusz",
+        "category": "matimati@.pl"
     }
-]
+]}

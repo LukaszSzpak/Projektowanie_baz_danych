@@ -1,7 +1,14 @@
 import React from 'react'
 import {Grid, TextField, Button} from '@material-ui/core'
 
+import { useHistory } from "react-router-dom";
+
 export default function ShowMenu() {
+
+    const history = useHistory();
+    const navigateTo = () => history.push('books#/books');//eg.history.push('/login');
+
+
     return(
         <Grid
             container
@@ -19,6 +26,11 @@ export default function ShowMenu() {
                     <Grid item xs={12}>
                         <Button id="change_data_button" variant ="contained" color="primary">
                         Change personal data
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button id="change_data_button" variant ="contained" color="primary" onClick={navigateTo}>
+                        Show books
                         </Button>
                     </Grid>
                     <Grid item xs={12}>
