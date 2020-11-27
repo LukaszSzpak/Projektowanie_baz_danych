@@ -39,6 +39,19 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book getBook(String id) {
+        if (bookRepository.findById(id).isPresent())
+            return bookRepository.findById(id).get();
+
+        return null;
+    }
+
+    @Override
+    public List<Book> getBooks() {
+        return bookRepository.findAll();
+    }
+
+    @Override
     public Book createBook(CreateBookDto createBookDto) {
         int maxId = -1;
         for(Book book : bookRepository.findAll()) {
@@ -92,5 +105,11 @@ public class BookServiceImpl implements BookService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Book> searchBook(String searchingPhrase) {
+        //TODO make a searcher
+        return null;
     }
 }
