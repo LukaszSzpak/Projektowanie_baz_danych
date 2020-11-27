@@ -1,7 +1,11 @@
 import React from 'react'
 import {Grid, TextField, Button} from '@material-ui/core'
+import { useHistory } from "react-router-dom";
 
 export default function ShowMenu() {
+    const history = useHistory();
+    const showBooks = () => history.push('/managebooks');
+
     return (
         <Grid
             container
@@ -20,7 +24,10 @@ export default function ShowMenu() {
                         <Button id="change_data_button_adm" variant ="contained" color="primary" >Manage personel</Button>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button id="borrow_book_adm" variant ="contained" color="primary" >Manage clients</Button>  
+                        <Button id="manage_clients_adm" variant ="contained" color="primary" >Manage clients</Button>  
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button id="manage_books_adm" variant ="contained" color="primary" onCLick={showBooks}>Manage books</Button>  
                     </Grid>
                     <Grid item xs={12}>
                         <Button id="add_new_title_adm" variant ="contained" color="primary" >Add new title</Button>    

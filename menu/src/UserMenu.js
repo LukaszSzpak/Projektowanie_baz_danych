@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom";
 export default function ShowMenu() {
 
     const history = useHistory();
-    const showBooks = () => history.push('/books#/books');//eg.history.push('/login');
-    const showWishList = () => history.push('/wishlist#/wishlist');//eg.history.push('/login');
+    const showBooks = () => history.push('/books');
+    const showWishList = () => history.push('/wishlist#/wishlist');
 
     return(
         <Grid
