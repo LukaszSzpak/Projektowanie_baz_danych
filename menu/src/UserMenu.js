@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom";
 export default function ShowMenu() {
 
     const history = useHistory();
-    const navigateTo = () => history.push('books#/books');//eg.history.push('/login');
-
+    const showBooks = () => history.push('/books#/books');//eg.history.push('/login');
+    const showWishList = () => history.push('/wishlist#/wishlist');//eg.history.push('/login');
 
     return(
         <Grid
@@ -29,7 +29,7 @@ export default function ShowMenu() {
                         </Button>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button id="change_data_button" variant ="contained" color="primary" onClick={navigateTo}>
+                        <Button id="change_data_button" variant ="contained" color="primary" onClick={showBooks}>
                         Show books
                         </Button>
                     </Grid>

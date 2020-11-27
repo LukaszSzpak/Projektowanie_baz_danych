@@ -7,9 +7,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import * as React from "react";
 import localStorageDataProvider from 'ra-data-local-storage';
 import BooksList from './BooksList';
+import AdminBookList from './AdminBookList'
+import WishList from './WishList'
 import { Admin, Resource } from 'react-admin';
 
 
+/*
 const dataProvider = localStorageDataProvider({
     defaultData: {
         books: [
@@ -19,7 +22,9 @@ const dataProvider = localStorageDataProvider({
             { id: 4, title: 'were', author: 'John wernbeck', category: 'bwerwń' } ]
     }
 }); 
+*/
 
+const dataProvider = localStorageDataProvider('api/books')
 
 const App = () => (
     <div className="App">
@@ -40,12 +45,25 @@ const App = () => (
 
         <Route path='/books'>
             <Admin dataProvider={dataProvider}>
-                <Resource name="books" list={BooksList} />
+                <Resource name='books' list={BooksList} />
             </Admin>
         </Route>
 
+        <Route path='/wishlist'>
+            <Admin dataProvider={dataProvider}>
+                <Resource name="wishlist" list={WishList} />
+            </Admin>
+        </Route>
+
+        <Route path='/managebooks'>
+            <Admin dataProvider={dataProvider}>
+                <Resource name="managebooks" list={AdminBookList}/>
+            </Admin>
+        </Route>
+
+
         <Route path='/'>
-            <p>MAIN</p>
+            <p >MAIN</p>
         </Route>
 
       </Switch>
