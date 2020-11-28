@@ -6,7 +6,8 @@ import {List,
     TextField, 
     EditButton, 
     DeleteButton,
-    useListContext, 
+    useListContext,
+    BooleanField, 
     } from 'react-admin'
 
 export default function UserList(props) {
@@ -17,7 +18,7 @@ export default function UserList(props) {
                 <TextField source='name'/>
                 <TextField source='surname'/>
                 <TextField source='email'/>
-                <TextField source='role'/>
+                <BooleanField source='role'/>
                 <EditButton basePath='/account'/>
                 <DeleteButton basePath='/account' />
             </Datagrid>
