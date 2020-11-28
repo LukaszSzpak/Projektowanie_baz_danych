@@ -11,15 +11,14 @@ import {List,
 
 export default function UserList(props) {
     return(
-        <List {...props} title="Accounts" actions={ListActions}>
+        <List {...props} title="Users" actions={ListActions}>
             <Datagrid>
                 <TextField source='id'/>
                 <TextField source='name'/>
                 <TextField source='surname'/>
                 <TextField source='email'/>
-                <TextField source='role'/>
-                <EditButton basePath='/account'/>
-                <DeleteButton basePath='/account' />
+                <EditButton basePath='/user'/>
+                <DeleteButton basePath='/user' />
             </Datagrid>
         </List>
     );

@@ -4,8 +4,6 @@ import roleContext from './RoleContext'
 
 export default function AccountEdit(props) {
 
-    const userRole = useContext(roleContext);
-
     return(
         <Edit title='Edit account' {...props}>
             <SimpleForm>
@@ -13,15 +11,6 @@ export default function AccountEdit(props) {
                 <TextInput source='name'/>
                 <TextInput source='surname'/>
                 <TextInput source='email'/>
-                { userRole==='admin' &&
-                    <SelectInput source='role' choices={
-                        [
-                            {id: 'user', name: 'user'},
-                            {id: 'librarian', name: 'librarian'},
-                            {id: 'admin', name: 'admin'},
-                        ]
-                    }/>
-                }
             </SimpleForm>
         </Edit>
     );
