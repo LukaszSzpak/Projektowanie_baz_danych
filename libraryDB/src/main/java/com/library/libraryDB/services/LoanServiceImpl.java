@@ -40,6 +40,7 @@ public class LoanServiceImpl implements LoanService {
             tempLoan.setAdditionalCost(loan.getAdditionalCost());
             tempLoan.setDatePlanningReturn(loan.getDatePlanningReturn());
             tempLoan.setDaysAfterReturnDate(loan.getDaysAfterReturnDate());
+            loanRepository.save(tempLoan);
 
             return tempLoan;
         }
