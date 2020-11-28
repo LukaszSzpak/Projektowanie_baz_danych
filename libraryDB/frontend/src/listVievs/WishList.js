@@ -1,12 +1,20 @@
 import * as React from "react";
 import { cloneElement, useMemo } from 'react';
-import { List, Datagrid, TextField, NumberField, useListContext, BooleanField, ExportButton, CreateButton, TopToolbar, sanitizeListRestProps} from 'react-admin';
+import { List,
+    Datagrid,
+    TextField,
+    NumberField,
+    BooleanField,
+    ExportButton,
+    CreateButton,
+    DeleteButton
+} from 'react-admin';
 import {Grid, Button} from '@material-ui/core'
 import PropTypes from 'prop-types';
 
 
 export const PostList = (props) => (
-    <List {...props} title = 'wishlist'>
+    <List {...props}>
         <Datagrid>
             <NumberField source="id" />
             <TextField source="title" />
@@ -14,7 +22,7 @@ export const PostList = (props) => (
             <TextField source="description" />
             <BooleanField source="avalible" />
             <ExportButton></ExportButton>
-            <CreateButton></CreateButton>
+            <DeleteButton></DeleteButton>
         </Datagrid>
     </List>
 );

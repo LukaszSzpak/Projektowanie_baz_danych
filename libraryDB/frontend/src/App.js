@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Login from './Login'
 import Register from './Register'
 import {roleContext} from "./RoleContext"
+import * as React from "react";
 
 import { Admin, Resource } from 'react-admin';
 import localStorageDataProvider from 'ra-data-local-storage';
@@ -16,7 +17,7 @@ import AdminBookList from './listVievs/AdminBookList'
 import WishList from './listVievs/WishList'
 
 
-/* test */
+
 const dataProvider = localStorageDataProvider({
   defaultData: {
       books: [
@@ -27,60 +28,27 @@ const dataProvider = localStorageDataProvider({
   }
 });
 
-//const dataProvider = localStorageDataProvider('api/books')
-
-export default function App() {
-  console.log('Provider', BooksList);
-  console.log('Provider', localStorageDataProvider);
-
+const App = () => {
   return (
-    <div className="App">
+      <div>
       <BrowserRouter>
-      <Switch>
-      <Route path='/login'>
-        <Login/>
-      </Route>
+    <Switch>
+    
+    <Route path='/books'>
+      <Admin dataProvider={dataProvider}>
+          <Resource name="books" list={AdminBookList} />
+      </Admin>
+    </Route>
 
-      <Route path='/register'>
-        <Register/>
-      </Route>
+    <Route path='/'>
+      <p>MAIN</p>
+    </Route>
 
-      <Route path='/user'>
-        <UserMenu />
-      </Route>
-
-      <Route path='/librarian'>
-        <LibrarianMenu/>
-      </Route>
-
-      <Route path='/admin'>
-        <AdminMenu />          
-      </Route>
-
-      <Route path='/books'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name='books' list={BooksList} />
-        </Admin>      
-      </Route>
-
-      <Route path='/managebooks'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name='managebooks' list={AdminBookList} />
-        </Admin>      
-      </Route>
-
-      <Route path='/wishlist'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name='wishlist' list={WishList} />
-        </Admin>      
-      </Route>
-
-      <Route path='/'>
-        <p>MAIN</p>
-      </Route>
-
-    </Switch>
-      </BrowserRouter>
-    </div>
-  );
+  </Switch>
+    </BrowserRouter>
+   </div>)
 }
+
+export default App
+
+
