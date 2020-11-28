@@ -7,7 +7,7 @@ export default function ShowMenu() {
 
     const history = useHistory();
     const showBooks = () => history.push('/books');
-    const showWishList = () => history.push('/wishlist#/wishlist');
+    const showWishList = () => history.push('/wishlist');
 
     return(
         <Grid
@@ -29,8 +29,13 @@ export default function ShowMenu() {
                         </Button>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button id="change_data_button" variant ="contained" color="primary" onClick={showBooks}>
+                        <Button id="show_books" variant ="contained" color="primary" onClick={showBooks}>
                         Show books
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button id="show_wish_list_button" variant ="contained" color="primary" onClick={showWishList}>
+                        Show wish list
                         </Button>
                     </Grid>
                     <Grid item xs={12}>

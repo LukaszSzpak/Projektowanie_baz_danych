@@ -13,6 +13,7 @@ import LibrarianMenu from './menus/LibrarianMenu'
 
 import BooksList from './listVievs/BooksList'
 import AdminBookList from './listVievs/AdminBookList'
+import WishList from './listVievs/WishList'
 
 
 /* test */
@@ -65,6 +66,12 @@ export default function App() {
       <Route path='/managebooks'>
         <Admin dataProvider={dataProvider}>
           <Resource name='managebooks' list={AdminBookList} />
+        </Admin>      
+      </Route>
+
+      <Route path='/wishlist'>
+        <Admin dataProvider={dataProvider}>
+          <Resource name='wishlist' list={WishList} />
         </Admin>      
       </Route>
 
