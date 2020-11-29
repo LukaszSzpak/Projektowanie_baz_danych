@@ -15,10 +15,8 @@ public class AppRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Collection Exists? " + mongoTemplate.collectionExists("user"));
-        System.out.println("Collection Exists? " + mongoTemplate.collectionExists("library"));
 
-        User newUser = new User("Lukas", "Szpak", "alukasz1@interia.pl", "hash");
-        mongoTemplate.save(newUser, "user");
+        //Uncomment line below to erase DB and load sample data
+        new SampleData(mongoTemplate).eraseAndAddSampleData();
     }
 }
