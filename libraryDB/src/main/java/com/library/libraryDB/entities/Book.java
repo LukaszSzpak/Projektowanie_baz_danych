@@ -3,6 +3,7 @@ package com.library.libraryDB.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Document(collection = "book")
@@ -22,7 +23,7 @@ public class Book {
     private String author;
     private String description;
     private boolean available;
-    private List<String> itemList;
+    private List<String> itemList = new LinkedList<>();
 
     public Book() {
     }
