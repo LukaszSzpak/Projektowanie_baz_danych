@@ -30,6 +30,7 @@ public class Loan {
     private Date datePlanningReturn;
     private int daysAfterReturnDate;
     private float additionalCost;
+    private boolean isBack = false;
 
     public Loan() {
     }
@@ -93,5 +94,13 @@ public class Loan {
 
     public void setAdditionalCost(float additionalCost) {
         this.additionalCost = additionalCost;
+    }
+
+    public boolean isBack() {
+        return isBack;
+    }
+
+    public void setBack(boolean back) {
+        isBack = back;
     }
 }
