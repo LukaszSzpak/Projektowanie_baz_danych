@@ -60,7 +60,7 @@ const ListActions = (props) => {
     );
 };
 
-const PostList = (props) => (
+const BookList = (props) => (
     <List {...props} actions={<ListActions />}>
         <Datagrid>
             <NumberField source="id" />
@@ -72,4 +72,4 @@ const PostList = (props) => (
     </List>
 );
 
-export default PostList
+export default BookList

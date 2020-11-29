@@ -7,25 +7,26 @@ import {List,
     EditButton, 
     DeleteButton,
     useListContext,
-    BooleanField, 
+    TopToolbar,
+    sanitizeListRestProps,
+    CreateButton,
     } from 'react-admin'
 
-export default function UserList(props) {
+const EmployeeList = () => (props) => {
     return(
-        <List {...props} title="Accounts" actions={ListActions}>
+        <List {...props} title="Employees" actions={ListActions}>
             <Datagrid>
                 <TextField source='id'/>
                 <TextField source='name'/>
                 <TextField source='surname'/>
                 <TextField source='email'/>
-                <BooleanField source='role'/>
-                <EditButton basePath='/account'/>
-                <DeleteButton basePath='/account' />
+                <TextField source='role'/>
+                <EditButton basePath='/employee'/>
+                <DeleteButton basePath='/employee' />
             </Datagrid>
         </List>
     );
 }
-
 
 const ListActions = (props) => {
     const {
@@ -58,7 +59,8 @@ const ListActions = (props) => {
             <CreateButton basePath={basePath} />
             <EditButton basePath={basePath} />
             <DeleteButton basePath={basePath} />
-                <IconEvent />
         </TopToolbar>
     );
 };
+
+export default EmployeeList
