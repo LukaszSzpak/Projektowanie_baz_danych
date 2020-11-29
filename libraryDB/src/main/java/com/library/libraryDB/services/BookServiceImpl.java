@@ -23,6 +23,7 @@ public class BookServiceImpl implements BookService {
         if (bookRepository.findById(id).isPresent()) {
             Book tempBook = bookRepository.findById(id).get();
             tempBook.addItemToList(itemId);
+            tempBook.setAvailable(true);
             bookRepository.save(tempBook);
 
             return tempBook;

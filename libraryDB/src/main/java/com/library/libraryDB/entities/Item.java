@@ -14,7 +14,7 @@ public class Item {
 
     @Id
     private String id;
-    private boolean available;
+    private boolean available = true;
     private String publishHouse;
     private String condition;
 

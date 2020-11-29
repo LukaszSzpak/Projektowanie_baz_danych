@@ -22,7 +22,7 @@ public class Book {
     private String title;
     private String author;
     private String description;
-    private boolean available;
+    private boolean available = false;
     private List<String> itemList = new LinkedList<>();
 
     public Book() {
