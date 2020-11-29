@@ -7,14 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(value = "/api/employee")
+@RequestMapping(value = "/api")
 public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping(value = "/{email}")
+    @GetMapping(value = "/employee/{email}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Employee> getEmployee(@PathVariable(value = "email") String email) {
         Employee tempEmployee = employeeService.getEmployeeByEmail(email);
@@ -24,7 +26,7 @@ public class EmployeeController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/{email}")
+    @PutMapping(value = "/employee/{email}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Employee> changeEmployeeData(@PathVariable(value = "email") String email,
                                                        @RequestBody Employee employee) {
@@ -35,7 +37,7 @@ public class EmployeeController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(value = "/")
+    @PostMapping(value = "/employee/")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         Employee tempEmployee = employeeService.createEmployee(employee);
@@ -45,11 +47,17 @@ public class EmployeeController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(value = "/{email}")
+    @DeleteMapping(value = "/employee/{email}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Boolean> deleteEmployee(@PathVariable(value = "email") String email) {
         if (employeeService.deleteEmployee(email))
             return new ResponseEntity<>(true, HttpStatus.OK);
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "employes")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Employee>> getEmployesList() {
+        return new ResponseEntity<>(employeeService.getEmployesList(), HttpStatus.OK);
     }
 }
