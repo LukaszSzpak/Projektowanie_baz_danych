@@ -4,7 +4,7 @@ import {useHistory, Link} from "react-router-dom";
 
 export default function Login(props) {
 
-    const [email, setEmail] = useState('');
+    const [emailInput, setEmailInput] = useState('');
     const [password, setPassword] = useState('');
 
     let {setRole} = props;
@@ -13,7 +13,7 @@ export default function Login(props) {
     const history = useHistory();
 
     function handleLogin() {
-        fetch(`/api/account?email=${email}&password=${password}`)
+        fetch(`/api/account?email=${emailInput}&password=${password}`)
             .then(
                 response => {
                     if(response.ok) {
@@ -42,7 +42,7 @@ export default function Login(props) {
             <div>
                 <form>
                     <Grid item xs={12}>
-                        <TextField id="email-input" label="email" onInput={ e =>setEmail(e.target.value)} />
+                        <TextField id="email-input" label="email" onInput={ e =>setEmailInput(e.target.value)} />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField id="password-input" label="password" onInput={ e =>setPassword(e.target.value)} />
