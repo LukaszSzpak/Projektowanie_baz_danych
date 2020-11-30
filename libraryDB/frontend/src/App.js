@@ -118,47 +118,6 @@ function App() {
           </Admin>
       </div>      
       </Route>
-
-      <Route path='/createuser'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="users" list={UserCreate} />
-        </Admin>
-      </Route>
-
-      <Route path='/createempolyee'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="employees" list={EmployeeCreate} />
-        </Admin>     
-      </Route>
-
-      <Route path='/edituser'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="users" list={UserEdit} />
-        </Admin>     
-      </Route>
-
-      <Route path='/editemployee'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="users" list={UserEdit} />
-        </Admin>     
-      </Route>
-
-      <Route path='/editbook'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="books" list={BookEdit} />
-        </Admin>     
-      </Route>
-
-      <Route path='/createbook'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="books" list={BookCreate} />
-        </Admin>     
-      </Route>
-
-      <Route path='/'>
-        <h1> MAIN </h1>
-      </Route>
-
     </Switch>
       
 
