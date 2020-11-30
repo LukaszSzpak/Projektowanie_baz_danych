@@ -30,26 +30,14 @@ import UserEdit from './admin-account-system/UserEdit'
 import EmployeeEdit from './admin-account-system/EmployeeEdit'
 import BookEdit from './books/BookEdit'
 
+import restProvider from 'ra-data-simple-rest'
+import UserAdminPanel from "./admin-account-system/EmployeeAdminPanel";
+import EmployeeAdminPanel from './admin-account-system/EmployeeAdminPanel'
 
 
 
-const dataProvider = localStorageDataProvider({
-      books: [
-          { id: '1', title: 'Dziady cz 3' , author: 'Adam Mickiewicz', description: 'baśń', avalible: true},
-          { id: '2', title: 'Myszy i Ludzie', author: 'John Steinbeck', description: 'baśń', avalible: true},
-          { id: '3', title: 'ewrwe' , author: 'Aderkiewicz', description: 'super książka', avalible: false},
-          { id: '4', title: 'were', author: 'John wernbeck', description: 'baśń', avalible: true} ],
 
-      users: [
-        {id: '1', name: 'Jan' , surname: 'Kowalski', email: 'kowalskijan@gmail.com'},
-        {id: '2', name: 'Adam' , surname: 'Mickiewicz', email: 'adammickiewicz@gmail.com'},
-        {id: '3', name: 'Jan' , surname: 'Komputer', email: 'komputer.com'} ],
-
-      employees: [
-          {id: '1', name: 'Jan' , surname: 'Kowalski', email: 'jakkow@gmail.com', category: 'librarian'},
-          {id: '2', name: 'Adam' , surname: 'Mickiewicz', email: 'kowjan@gmail.com', category: 'admin'},
-          {id: '3', name: 'Jan' , surname: 'Komputer', email: 'admic@gmail.com', category: 'librarian'} ]
-});
+const dataProvider = restProvider('http://localhost:8080');
 
 {/**
 const App = () => (
@@ -94,15 +82,11 @@ function App() {
       </Route>
 
       <Route path='/userlist'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="users" list={UserList} />
-        </Admin>      
+        <UserAdminPanel/>     
       </Route>
 
       <Route path='/employeelist'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="employees" list={EmployeeList} />
-        </Admin>      
+        <EmployeeAdminPanel />
       </Route>
 
       <Route path='/adminbooklist'>
@@ -112,56 +96,11 @@ function App() {
       </Route>
 
       <Route path='/wishlist'>
-        <div> 
           <Admin dataProvider={dataProvider}>
-          <Resource name="wishlist" list={WishList} />
-          </Admin>
-      </div>      
+            <Resource name="wishlist" list={WishList} />
+          </Admin>     
       </Route>
-
-      <Route path='/createuser'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="users" list={UserCreate} />
-        </Admin>
-      </Route>
-
-      <Route path='/createempolyee'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="employees" list={EmployeeCreate} />
-        </Admin>     
-      </Route>
-
-      <Route path='/edituser'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="users" list={UserEdit} />
-        </Admin>     
-      </Route>
-
-      <Route path='/editemployee'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="users" list={UserEdit} />
-        </Admin>     
-      </Route>
-
-      <Route path='/editbook'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="books" list={BookEdit} />
-        </Admin>     
-      </Route>
-
-      <Route path='/createbook'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="books" list={BookCreate} />
-        </Admin>     
-      </Route>
-
-      <Route path='/'>
-        <h1> MAIN </h1>
-      </Route>
-
     </Switch>
-      
-
     </div>
   );
 }
