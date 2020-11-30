@@ -3,6 +3,7 @@ package com.library.libraryDB.controllers;
 import com.library.libraryDB.entities.User;
 import com.library.libraryDB.services.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,11 @@ public class UserController {
     @GetMapping(value = "/users")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<User>> listAllUsers() {
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+        List<User> userList = userService.getAllUsers();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=UTF-8");
+        headers.add("Content-Range", ("users 0-" + userList.size() + "/" + userList.size()));
+        return new ResponseEntity<>(userList, headers, HttpStatus.OK);
     }
 
     @PostMapping(value = "/user")
