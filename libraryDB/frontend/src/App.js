@@ -32,6 +32,7 @@ import BookEdit from './books/BookEdit'
 
 import restProvider from 'ra-data-simple-rest'
 import UserAdminPanel from "./admin-account-system/EmployeeAdminPanel";
+import EmployeeAdminPanel from './admin-account-system/EmployeeAdminPanel'
 
 
 
@@ -85,9 +86,7 @@ function App() {
       </Route>
 
       <Route path='/employeelist'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="employees" list={EmployeeList} />
-        </Admin>      
+        <EmployeeAdminPanel />
       </Route>
 
       <Route path='/adminbooklist'>
@@ -97,15 +96,11 @@ function App() {
       </Route>
 
       <Route path='/wishlist'>
-        <div> 
           <Admin dataProvider={dataProvider}>
-          <Resource name="wishlist" list={WishList} />
-          </Admin>
-      </div>      
+            <Resource name="wishlist" list={WishList} />
+          </Admin>     
       </Route>
     </Switch>
-      
-
     </div>
   );
 }

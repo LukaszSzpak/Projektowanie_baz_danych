@@ -7,7 +7,7 @@ import UserEdit from './UserEdit'
 export default function UserAdminPanel() {
 
     return(
-        <Admin dataProvider={restProvider('http://localhost:8080/api')}>
+        <Admin dataProvider={restProvider('http://localhost:8080')}>
             <Resource name="users" list={UserList} create={UserCreate} edit={UserEdit}/>
         </Admin>    
     )
