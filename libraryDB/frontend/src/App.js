@@ -30,26 +30,12 @@ import UserEdit from './admin-account-system/UserEdit'
 import EmployeeEdit from './admin-account-system/EmployeeEdit'
 import BookEdit from './books/BookEdit'
 
+import restProvider from 'ra-data-simple-rest'
 
 
 
-const dataProvider = localStorageDataProvider({
-      books: [
-          { id: '1', title: 'Dziady cz 3' , author: 'Adam Mickiewicz', description: 'baśń', avalible: true},
-          { id: '2', title: 'Myszy i Ludzie', author: 'John Steinbeck', description: 'baśń', avalible: true},
-          { id: '3', title: 'ewrwe' , author: 'Aderkiewicz', description: 'super książka', avalible: false},
-          { id: '4', title: 'were', author: 'John wernbeck', description: 'baśń', avalible: true} ],
 
-      users: [
-        {id: '1', name: 'Jan' , surname: 'Kowalski', email: 'kowalskijan@gmail.com'},
-        {id: '2', name: 'Adam' , surname: 'Mickiewicz', email: 'adammickiewicz@gmail.com'},
-        {id: '3', name: 'Jan' , surname: 'Komputer', email: 'komputer.com'} ],
-
-      employees: [
-          {id: '1', name: 'Jan' , surname: 'Kowalski', email: 'jakkow@gmail.com', category: 'librarian'},
-          {id: '2', name: 'Adam' , surname: 'Mickiewicz', email: 'kowjan@gmail.com', category: 'admin'},
-          {id: '3', name: 'Jan' , surname: 'Komputer', email: 'admic@gmail.com', category: 'librarian'} ]
-});
+const dataProvider = restProvider('http://localhost:8080');
 
 {/**
 const App = () => (
