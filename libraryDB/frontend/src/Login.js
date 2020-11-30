@@ -12,7 +12,8 @@ export default function Login(props) {
 
     const history = useHistory();
 
-    function handleLogin() {
+    function handleLogin(e) {
+        e.preventDefault;
         fetch(`/api/account?email=${emailInput}&password=${password}`)
             .then(
                 response => {
@@ -28,7 +29,6 @@ export default function Login(props) {
                     else {
                         alert("Incorrect credentials");
                     }
-                    return response.ok;
                 })
     }
 
@@ -48,9 +48,7 @@ export default function Login(props) {
                         <TextField id="password-input" label="password" onInput={ e =>setPassword(e.target.value)} />
                     </Grid>
                     <Grid item xs={12}>
-                        <Link to={handleLogin() ? '/' : '#'}>
-                            <Button type="submit" variant="contained" size="large" color="primary">Login</Button>
-                        </Link>
+                        <Button type="submit" onClick={handleLogin} variant="contained" size="large" color="primary">Login</Button>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography>
