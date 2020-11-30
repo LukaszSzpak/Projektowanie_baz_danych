@@ -12,27 +12,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="user")
 public class User {
     /*
-    id - string (identical to client card)
+    email - string - id
     name - string
     surname - string
-    email - string
     password - string
     wish_list - List<String> (Book_Id)
      */
 
     @Id
-    private String id;
+    private String email;
     private String name;
     private String surname;
-    @Indexed(unique = true)
-    private String email;
     private String password;
     private List<String> wishList;
 
     public User() { }
 
-    public User(String id, String name, String surname, String email, String password){
-        this.id = id;
+    public User(String name, String surname, String email, String password){
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -40,8 +36,7 @@ public class User {
         this.wishList = null;
     }
 
-    public User(String id, String name, String surname, String email, String password, List<String> wishList) {
-        this.id = id;
+    public User(String name, String surname, String email, String password, List<String> wishList) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -49,9 +44,6 @@ public class User {
         this.wishList = wishList;
     }
 
-    public String getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
