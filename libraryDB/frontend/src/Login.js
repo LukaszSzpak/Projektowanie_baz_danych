@@ -13,7 +13,7 @@ export default function Login(props) {
     const history = useHistory();
 
     function handleLogin(e) {
-        e.preventDefault;
+        e.preventDefault();
         fetch(`/api/account?email=${emailInput}&password=${password}`)
             .then(
                 response => {
