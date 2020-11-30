@@ -31,6 +31,7 @@ import EmployeeEdit from './admin-account-system/EmployeeEdit'
 import BookEdit from './books/BookEdit'
 
 import restProvider from 'ra-data-simple-rest'
+import UserAdminPanel from "./admin-account-system/EmployeeAdminPanel";
 
 
 
@@ -80,9 +81,7 @@ function App() {
       </Route>
 
       <Route path='/userlist'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="users" list={UserList} />
-        </Admin>      
+        <UserAdminPanel/>     
       </Route>
 
       <Route path='/employeelist'>
