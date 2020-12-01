@@ -1,5 +1,6 @@
 package com.library.libraryDB.controllers;
 
+import com.library.libraryDB.entities.Book;
 import com.library.libraryDB.entities.User;
 import com.library.libraryDB.services.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -78,15 +80,23 @@ public class UserController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/user/getWishList?user={email}")
+    @GetMapping(value = "/wishlist{*}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<String>> getWishList(@PathVariable(value = "email") String email) {
+    public ResponseEntity<List<String>> getWishList(@RequestHeader("User-email") String email) {
+        System.out.println(email);
         User resultUser = userService.getUserById(email);
 
-        if (resultUser != null)
+        if (resultUser != null) {
+         /*   List<Book> bookList = bookService.getBooks();
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Type", "application/json; charset=UTF-8");
+            headers.add("Content-Range", ("book 0-" + bookList.size() + "/" + bookList.size()));
+
+          */
+
             return new ResponseEntity<>(resultUser.getWishList(), HttpStatus.OK);
-        else
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } else
+            return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
 }

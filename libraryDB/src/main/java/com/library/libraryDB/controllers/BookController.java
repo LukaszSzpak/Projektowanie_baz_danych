@@ -29,7 +29,7 @@ public class BookController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/books{nothing}")
+    @GetMapping(value = "/books{*}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Book>> getBooks() {
         List<Book> bookList = bookService.getBooks();
