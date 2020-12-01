@@ -68,7 +68,7 @@ function App() {
     }
 
 
-    const dataProvider = simpleRestProvider('http://localhost:8080/api');
+    const dataProvider = simpleRestProvider('http://localhost:8080/api', httpClient);
     const wishListProvider = simpleRestProvider('http://localhost:8080/api', httpClient);
 
   return (
