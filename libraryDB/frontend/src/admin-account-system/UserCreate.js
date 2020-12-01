@@ -10,6 +10,7 @@ export default function AccountCreate(props) {
                 <TextInput source='name'/>
                 <TextInput source='surname'/>
                 <TextInput source='email'/>
+                <TextInput source='password'/>
             </SimpleForm>
         </Create>
     );
