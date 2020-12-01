@@ -1,6 +1,7 @@
 package com.library.libraryDB.entities;
 
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.data.annotation.AccessType;
@@ -24,7 +25,7 @@ public class User {
     private String name;
     private String surname;
     private String password;
-    private List<String> wishList;
+    private List<String> wishList = new LinkedList<>();
 
     public User() { }
 
@@ -33,7 +34,7 @@ public class User {
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.wishList = null;
+        this.wishList = new LinkedList<>();
     }
 
     public User(String name, String surname, String email, String password, List<String> wishList) {

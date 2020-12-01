@@ -2,7 +2,9 @@ package com.library.libraryDB.controllers;
 
 import com.library.libraryDB.dto.UserWithIdDto;
 import com.library.libraryDB.entities.Book;
+import com.library.libraryDB.entities.Item;
 import com.library.libraryDB.entities.User;
+import com.library.libraryDB.services.Interfaces.ItemService;
 import com.library.libraryDB.services.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +21,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ItemService itemService;
 
     @GetMapping(value = "/user/{email}")
     @ResponseStatus(HttpStatus.OK)
@@ -84,19 +88,22 @@ public class UserController {
 
     @GetMapping(value = "/wishlist{*}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<String>> getWishList(@RequestHeader("User-email") String email) {
-        System.out.println(email);
+    public ResponseEntity<List<Item>> getWishList(@RequestHeader("User-email") String email) {
         User resultUser = userService.getUserById(email);
+            System.out.println(email);
 
         if (resultUser != null) {
-         /*   List<Book> bookList = bookService.getBooks();
+            LinkedList<Item> itemLinkedList = new LinkedList<>();
+
+            System.out.println(resultUser.getWishList());
+            for (String itemId : resultUser.getWishList())
+                itemLinkedList.add(itemService.getItem(itemId));
+
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type", "application/json; charset=UTF-8");
-            headers.add("Content-Range", ("book 0-" + bookList.size() + "/" + bookList.size()));
+            headers.add("Content-Range", ("item 0-" + itemLinkedList.size() + "/" + itemLinkedList.size()));
 
-          */
-
-            return new ResponseEntity<>(resultUser.getWishList(), HttpStatus.OK);
+            return new ResponseEntity<>(itemLinkedList, headers, HttpStatus.OK);
         } else
             return new ResponseEntity<>(null, HttpStatus.OK);
     }

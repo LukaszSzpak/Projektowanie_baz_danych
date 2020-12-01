@@ -44,16 +44,20 @@ public class SampleData {
     }
 
     private void addUsers() {
-        mongoTemplate.save(new User(
+        User user1 = new User(
                 "Lukasz",
                 "Szpak",
                 "alukasz1@interia.pl",
-                "pass1"));
+                "pass1");
+        user1.addToWishList("2");
+        mongoTemplate.save(user1);
+
         mongoTemplate.save(new User(
                 "Piotr",
                 "Bobeł",
                 "piotr_bobel@gmail.com",
                 "pass2"));
+
         mongoTemplate.save(new User(
                 "Piotr",
                 "Augustowski",
