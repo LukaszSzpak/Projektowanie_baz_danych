@@ -41,7 +41,7 @@ public class BookController {
         return new ResponseEntity<>(bookList, headers, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/book")
+    @PostMapping(value = "/books")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Book> createBook(@RequestBody CreateBookDto createBookDto) {
         return new ResponseEntity<>(bookService.createBook(createBookDto) ,HttpStatus.OK);
