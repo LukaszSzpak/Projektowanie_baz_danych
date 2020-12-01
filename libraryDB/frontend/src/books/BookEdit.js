@@ -10,7 +10,6 @@ export default function BookEdit(props) {
                 <TextInput source='title'/>
                 <TextInput source='author'/>
                 <TextInput source='description'/>
-                <TextInput source='avalible'/>
             </SimpleForm>
         </Edit>
     );

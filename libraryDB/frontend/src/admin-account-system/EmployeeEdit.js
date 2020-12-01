@@ -10,7 +10,7 @@ export default function AccountEdit(props) {
                 <TextInput source='name'/>
                 <TextInput source='surname'/>
                 <TextInput source='email'/>
-                <SelectInput source="category" choices={[
+                <SelectInput source="role" choices={[
                     { id: 'admin', name: 'admin' },
                     { id: 'librarian', name: 'librarian' },
                 ]} />

@@ -1,8 +1,10 @@
 package com.library.libraryDB.controllers;
 
 import com.library.libraryDB.dto.CreateUserDto;
+import com.library.libraryDB.entities.Book;
 import com.library.libraryDB.entities.Item;
 import com.library.libraryDB.entities.User;
+import com.library.libraryDB.services.Interfaces.BookService;
 import com.library.libraryDB.services.Interfaces.ItemService;
 import com.library.libraryDB.services.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private ItemService itemService;
+    private BookService bookService;
 
     @GetMapping(value = "/users/{email}")
     @ResponseStatus(HttpStatus.OK)
@@ -87,16 +89,17 @@ public class UserController {
 
     @GetMapping(value = "/wishlist{*}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Item>> getWishList(@RequestHeader("User-id") String id) {
+    public ResponseEntity<List<Book>> getWishList(@RequestHeader("User-id") String id) {
         User resultUser = userService.getUserById(id);
             System.out.println(id);
 
         if (resultUser != null) {
-            LinkedList<Item> itemLinkedList = new LinkedList<>();
+            LinkedList<Book> itemLinkedList = new LinkedList<>();
 
-            System.out.println(resultUser.getWishList());
-            for (String itemId : resultUser.getWishList())
-                itemLinkedList.add(itemService.getItem(itemId));
+            for (String bookId : resultUser.getWishList())
+                itemLinkedList.add(bookService.getBook(bookId));
+
+            System.out.println(itemLinkedList);
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type", "application/json; charset=UTF-8");
