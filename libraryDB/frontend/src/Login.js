@@ -9,6 +9,7 @@ export default function Login(props) {
 
     let {setRole} = props;
     let {setEmail} = props;
+    let {setId} = props;
 
     const history = useHistory();
 
@@ -23,6 +24,7 @@ export default function Login(props) {
                                 let userRole = account.hasOwnProperty("role") ? account["role"] : "user";
                                 setRole(userRole);
                                 setEmail(account["email"]);
+                                setId(account["id"]);
                                 history.push('/home');
                                 //history.push(`/${userRole}`);
                             })

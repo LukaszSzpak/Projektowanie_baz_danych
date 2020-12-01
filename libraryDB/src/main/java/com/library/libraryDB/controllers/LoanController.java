@@ -53,8 +53,14 @@ public class LoanController {
 
     @GetMapping(value = "/loans")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Loan>> getAllLoans() {
-        List<Loan> loanList = loanService.getAllLoans();
+    public ResponseEntity<List<Loan>> getAllLoans(@RequestHeader("User-role") String role,
+                                                  @RequestHeader("User-id") String id) {
+        List<Loan> loanList = null;
+
+        if (role.equals("user"))
+            loanList = loanService.getUserLoanList(id);
+        else
+            loanList = loanService.getAllLoans();
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=UTF-8");

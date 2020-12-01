@@ -15,7 +15,7 @@ import LibrarianMenu from './menus/LibrarianMenu'
 //ListViews
 import UserList from './admin-account-system/UserList'
 import EmployeeList from './admin-account-system/EmployeeList'
-import BooksList from './listViews/BookList'
+import BookList from './listViews/BookList'
 import AdminBookList from './listViews/AdminBookList'
 import WishList from './listViews/WishList'
 import TransactionList from './transactions/TransactionList'
@@ -39,6 +39,7 @@ import simpleRestProvider from 'ra-data-simple-rest'
 function App() {
     const [email, setEmail] = React.useState('');
     const [role, setRole] = React.useState('');
+    const [id, setId] = React.useState('');
 
     const httpClient = (url, options = {}) => {
         if (!options.headers) {
@@ -46,6 +47,8 @@ function App() {
         }
         console.log(email)
         options.headers.set('User-email', email);
+        options.headers.set('User-role', role);
+        options.headers.set('User-id', id);
         return fetchUtils.fetchJson(url, options);
     };
 
@@ -57,6 +60,10 @@ function App() {
       setRole(value);
     }
 
+    function handleIdChange(value) {
+        setId(value);
+    }
+
 
     const dataProvider = simpleRestProvider('http://localhost:8080/api', httpClient);
     const wishListProvider = simpleRestProvider('http://localhost:8080/api', httpClient);
@@ -66,7 +73,7 @@ function App() {
       <Switch>
 
       <Route exact path='/login'>
-        <Login setEmail={handleEmailChange} setRole={handleRoleChange}/>
+        <Login setEmail={handleEmailChange} setRole={handleRoleChange} setId={handleIdChange}/>
       </Route>
 
       <Route exact path='/register'>
@@ -105,7 +112,7 @@ function GetPanel(props) {
     else if (props.role === 'user') {
       return (
       <Admin dataProvider={props.dataProvider}>
-        <Resource name="books" list = {BooksList}/>
+        <Resource name="books" list = {BookList}/>
         <Resource name="wishlist" list = {WishList}/>
         <Resource name="loans" list = {TransactionList} />
       </Admin>)

@@ -20,8 +20,7 @@ export const WishList = (props) => (
             <TextField source="title" />
             <TextField source="author" />
             <TextField source="description" />
-            <BooleanField source="avalible" />
-            <ExportButton></ExportButton>
+            <BooleanField source="avaliable" />
             <DeleteButton></DeleteButton>
         </Datagrid>
     </List>

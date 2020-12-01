@@ -133,7 +133,7 @@ public class SampleData {
 
         mongoTemplate.save(new Loan(
                 "1",
-                "piotr_bobel@gmail.com",
+                "1",
                 "pracownik1@gmail.com",
                 "2",
                 "3",
@@ -143,7 +143,7 @@ public class SampleData {
 
         mongoTemplate.save(new Loan(
                 "2",
-                "alukasz1@interia.pl",
+                "2",
                 "pracownik1@gmail.com",
                 "3",
                 "6",

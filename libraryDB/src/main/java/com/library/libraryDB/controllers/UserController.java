@@ -87,9 +87,9 @@ public class UserController {
 
     @GetMapping(value = "/wishlist{*}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Item>> getWishList(@RequestHeader("User-email") String email) {
-        User resultUser = userService.getUserById(email);
-            System.out.println(email);
+    public ResponseEntity<List<Item>> getWishList(@RequestHeader("User-id") String id) {
+        User resultUser = userService.getUserById(id);
+            System.out.println(id);
 
         if (resultUser != null) {
             LinkedList<Item> itemLinkedList = new LinkedList<>();
