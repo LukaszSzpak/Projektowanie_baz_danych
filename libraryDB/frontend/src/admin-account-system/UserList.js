@@ -15,7 +15,6 @@ import {List,
 const UserList = (props) => (
     <List {...props} title="Users">
         <Datagrid>
-            <TextField source='id'/>
             <TextField source='name'/>
             <TextField source='surname'/>
             <TextField source='email'/>

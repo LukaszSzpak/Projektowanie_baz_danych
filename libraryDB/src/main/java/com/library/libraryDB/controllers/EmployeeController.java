@@ -1,8 +1,10 @@
 package com.library.libraryDB.controllers;
 
+import com.library.libraryDB.dto.EmployeeWithIdDto;
 import com.library.libraryDB.entities.Employee;
 import com.library.libraryDB.services.Interfaces.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,9 +57,14 @@ public class EmployeeController {
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "employes")
+    @GetMapping(value = "employees{*}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Employee>> getEmployesList() {
-        return new ResponseEntity<>(employeeService.getEmployesList(), HttpStatus.OK);
+    public ResponseEntity<List<EmployeeWithIdDto>> getEmployesList() {
+        List<Employee> employeeList = employeeService.getEmployesList();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=UTF-8");
+        headers.add("Content-Range", ("employee 0-" + employeeList.size() + "/" + employeeList.size()));
+
+        return new ResponseEntity<>(new EmployeeWithIdDto().parseEmployesList(employeeList), headers, HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.library.libraryDB.controllers;
 
+import com.library.libraryDB.dto.UserWithIdDto;
 import com.library.libraryDB.entities.Book;
 import com.library.libraryDB.entities.User;
 import com.library.libraryDB.services.Interfaces.UserService;
@@ -32,12 +33,13 @@ public class UserController {
 
     @GetMapping(value = "/users")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<User>> listAllUsers() {
+    public ResponseEntity<List<UserWithIdDto>> listAllUsers() {
         List<User> userList = userService.getAllUsers();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=UTF-8");
         headers.add("Content-Range", ("user 0-" + userList.size() + "/" + userList.size()));
-        return new ResponseEntity<>(userList, headers, HttpStatus.OK);
+
+        return new ResponseEntity<>(new UserWithIdDto().parseUsersList(userList), headers, HttpStatus.OK);
     }
 
     @PostMapping(value = "/user")
