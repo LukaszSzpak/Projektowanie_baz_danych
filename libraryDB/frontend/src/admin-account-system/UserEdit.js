@@ -7,10 +7,10 @@ export default function AccountEdit(props) {
     return(
         <Edit title='Edit account' {...props}>
             <SimpleForm>
-                <TextInput source='id'/>
                 <TextInput source='name'/>
                 <TextInput source='surname'/>
                 <TextInput source='email'/>
+                <TextInput source='password'/>
             </SimpleForm>
         </Edit>
     );
