@@ -19,7 +19,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping(value = "/book/{id}")
+    @GetMapping(value = "/books/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Book> getBook(@PathVariable(value = "id") String id) {
         Book tempBook = bookService.getBook(id);
@@ -33,9 +33,11 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Book>> getBooks() {
         List<Book> bookList = bookService.getBooks();
+
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=UTF-8");
         headers.add("Content-Range", ("book 0-" + bookList.size() + "/" + bookList.size()));
+
         return new ResponseEntity<>(bookList, headers, HttpStatus.OK);
     }
 
@@ -45,7 +47,7 @@ public class BookController {
         return new ResponseEntity<>(bookService.createBook(createBookDto) ,HttpStatus.OK);
     }
 
-    @PutMapping(value = "/book/{id}")
+    @PutMapping(value = "/books/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Book> updateBook(@RequestBody Book book,
                                            @PathVariable(value = "id") String id) {
