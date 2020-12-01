@@ -13,13 +13,15 @@ public class Employee {
      */
 
     @Id
+    private String id;
     private String email;
     private String name;
     private String surname;
     private String role;
     private String password;
 
-    public Employee(String email, String name, String surname, String role, String password) {
+    public Employee(String id, String email, String name, String surname, String role, String password) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -28,6 +30,18 @@ public class Employee {
     }
 
     public Employee() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEmail() {

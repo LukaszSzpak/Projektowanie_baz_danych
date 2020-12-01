@@ -14,16 +14,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public Employee getEmployeeByEmail(String email) {
-        if (employeeRepository.findById(email).isPresent())
-            return employeeRepository.findById(email).get();
+    public Employee getEmployeeById(String id) {
+        if (employeeRepository.findById(id).isPresent())
+            return employeeRepository.findById(id).get();
         return null;
     }
 
     @Override
-    public Employee changeData(Employee employee, String email) {
-        if (employeeRepository.findById(email).isPresent()) {
-            Employee tempEmployee = employeeRepository.findById(email).get();
+    public Employee changeData(Employee employee, String id) {
+        if (employeeRepository.findById(id).isPresent()) {
+            Employee tempEmployee = employeeRepository.findById(id).get();
             tempEmployee.setName(employee.getName());
             tempEmployee.setSurname(employee.getSurname());
             tempEmployee.setRole(employee.getRole());
@@ -36,9 +36,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
-        String employeeEmail = employee.getEmail();
+        String employeeId = employee.getId();
 
-        if (employeeRepository.findById(employeeEmail).isPresent()) {
+        if (employeeRepository.findById(employeeId).isPresent()) {
             return null;
         }
         employeeRepository.save(employee);
@@ -46,9 +46,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Boolean deleteEmployee(String email) {
-        if (employeeRepository.findById(email).isPresent()) {
-            employeeRepository.deleteById(email);
+    public Boolean deleteEmployee(String id) {
+        if (employeeRepository.findById(id).isPresent()) {
+            employeeRepository.deleteById(id);
             return true;
         }
         return false;

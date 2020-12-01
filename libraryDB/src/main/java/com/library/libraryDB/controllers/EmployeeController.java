@@ -1,6 +1,6 @@
 package com.library.libraryDB.controllers;
 
-import com.library.libraryDB.dto.EmployeeWithIdDto;
+import com.library.libraryDB.dto.CreateEmployeeDto;
 import com.library.libraryDB.entities.Employee;
 import com.library.libraryDB.services.Interfaces.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,53 +18,53 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping(value = "/employee/{email}")
+    @GetMapping(value = "/employees/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Employee> getEmployee(@PathVariable(value = "email") String email) {
-        Employee tempEmployee = employeeService.getEmployeeByEmail(email);
+    public ResponseEntity<Employee> getEmployee(@PathVariable(value = "id") String id) {
+        Employee tempEmployee = employeeService.getEmployeeById(id);
 
         if (tempEmployee != null)
             return new ResponseEntity<>(tempEmployee, HttpStatus.OK);
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/employee/{email}")
+    @PutMapping(value = "/employees/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Employee> changeEmployeeData(@PathVariable(value = "email") String email,
+    public ResponseEntity<Employee> changeEmployeeData(@PathVariable(value = "id") String id,
                                                        @RequestBody Employee employee) {
-        Employee tempEmployee = employeeService.changeData(employee, email);
+        Employee tempEmployee = employeeService.changeData(employee, id);
 
         if (tempEmployee != null)
             return new ResponseEntity<>(tempEmployee, HttpStatus.OK);
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(value = "/employee/")
+    @PostMapping(value = "/employees")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        Employee tempEmployee = employeeService.createEmployee(employee);
+    public ResponseEntity<Employee> createEmployee(@RequestBody CreateEmployeeDto createEmployeeDto) {
+        Employee tempEmployee = employeeService.createEmployee(createEmployeeDto.parseToEmployee(employeeService));
 
         if (tempEmployee != null)
             return new ResponseEntity<>(tempEmployee, HttpStatus.OK);
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(value = "/employee/{email}")
+    @DeleteMapping(value = "/employees/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Boolean> deleteEmployee(@PathVariable(value = "email") String email) {
-        if (employeeService.deleteEmployee(email))
+    public ResponseEntity<Boolean> deleteEmployee(@PathVariable(value = "id") String id) {
+        if (employeeService.deleteEmployee(id))
             return new ResponseEntity<>(true, HttpStatus.OK);
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(value = "employees{*}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<EmployeeWithIdDto>> getEmployesList() {
+    public ResponseEntity<List<Employee>> getEmployesList() {
         List<Employee> employeeList = employeeService.getEmployesList();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=UTF-8");
         headers.add("Content-Range", ("employee 0-" + employeeList.size() + "/" + employeeList.size()));
 
-        return new ResponseEntity<>(new EmployeeWithIdDto().parseEmployesList(employeeList), headers, HttpStatus.OK);
+        return new ResponseEntity<>(employeeList, headers, HttpStatus.OK);
     }
 }

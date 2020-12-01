@@ -1,36 +1,24 @@
 package com.library.libraryDB.dto;
 
 import com.library.libraryDB.entities.Employee;
+import com.library.libraryDB.services.Interfaces.EmployeeService;
 
-import java.util.LinkedList;
-import java.util.List;
-
-public class EmployeeWithIdDto {
-    private String id;
+public class CreateEmployeeDto {
     private String email;
     private String name;
     private String surname;
     private String role;
     private String password;
 
-    public EmployeeWithIdDto(String id, String email, String name, String surname, String role, String password) {
-        this.id = id;
+    public CreateEmployeeDto() {
+    }
+
+    public CreateEmployeeDto(String email, String name, String surname, String role, String password) {
         this.email = email;
         this.name = name;
         this.surname = surname;
         this.role = role;
         this.password = password;
-    }
-
-    public EmployeeWithIdDto() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -73,15 +61,10 @@ public class EmployeeWithIdDto {
         this.password = password;
     }
 
-    public List<EmployeeWithIdDto> parseEmployesList(List<Employee> employeeList) {
-        LinkedList<EmployeeWithIdDto> employeeWithIdDtoLinkedList = new LinkedList<>();
-        int id = 1;
-        for (Employee employee : employeeList) {
-            employeeWithIdDtoLinkedList.add(new EmployeeWithIdDto(String.valueOf(id), employee.getEmail(), employee.getName(),
-                    employee.getSurname(), employee.getRole(), employee.getPassword()));
-            id++;
-        }
+    public Employee parseToEmployee(EmployeeService employeeService) {
+        int len = Integer.parseInt(employeeService.getEmployesList().get(employeeService.getEmployesList().size() - 1).getId());
 
-        return employeeWithIdDtoLinkedList;
+        return new Employee(String.valueOf(len + 1), this.getEmail(), this.getName(), this.getSurname(),
+                this.getRole(), this.getPassword());
     }
 }

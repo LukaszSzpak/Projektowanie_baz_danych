@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addBookToWishList(User user, String bookId) {
-        if (bookRepository.findById(bookId).isPresent() && userRepository.findById(user.getEmail()).isPresent()) {
-            User resultUser = userRepository.findById(user.getEmail()).get();
+        if (bookRepository.findById(bookId).isPresent() && userRepository.findById(user.getId()).isPresent()) {
+            User resultUser = userRepository.findById(user.getId()).get();
             resultUser.addToWishList(bookId);
             return resultUser;
         }

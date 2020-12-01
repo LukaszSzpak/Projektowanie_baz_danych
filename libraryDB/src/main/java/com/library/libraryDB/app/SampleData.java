@@ -70,12 +70,14 @@ public class SampleData {
 
     private void addEmployes() {
         mongoTemplate.save(new Employee(
+                "1",
                 "pracownik1@gmail.com",
                 "Jan",
                 "Kowalski",
                 "librarian",
                 "pass"));
         mongoTemplate.save(new Employee(
+                "2",
                 "root@root.pl",
                 "Admin",
                 "ROOT",
