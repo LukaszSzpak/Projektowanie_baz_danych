@@ -13,8 +13,9 @@ import {
     BooleanField,
     Filter,
     TextInput,
-    DateField,
-    EditButton
+    DeleteButton,
+    EditButton,
+    DateField
 } from 'react-admin';
 
 import {Grid, Button} from '@material-ui/core'

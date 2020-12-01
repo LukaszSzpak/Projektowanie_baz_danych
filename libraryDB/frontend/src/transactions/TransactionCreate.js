@@ -1,17 +1,17 @@
 import React from 'react'
-import {Create, SimpleForm, TextInput, SelectInput } from 'react-admin'
+import {Create, SimpleForm, TextInput, SelectInput ,DateInput, NumberInput } from 'react-admin'
 
 export default function BookCreate(props) {
 
     return(
         <Create title='Create book' {...props}>
             <SimpleForm>
-            <NumberField source="id" />
-                <TextField source="userId" />
-                <TextField source="employeeId" />
-                <TextField source="bookId" />
-                <DateField sourde="rentDate" />
-                <DateField sourde="datePlanningReturn" />
+            <NumberInput source="id" />
+                <TextInput source="userId" />
+                <TextInput source="employeeId" />
+                <TextInput source="bookId" />
+                <DateInput sourde="rentDate" />
+                <DateInput sourde="datePlanningReturn" />
             </SimpleForm>
         </Create>
     );

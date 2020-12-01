@@ -13,7 +13,8 @@ import {
     BooleanField,
     Filter,
     TextInput,
-    DateField
+    DateField,
+    DeleteButton
 } from 'react-admin';
 
 import {Grid, Button} from '@material-ui/core'
@@ -28,8 +29,8 @@ const TransactionList = (props) => (
             <TextField source="userId" />
             <TextField source="employeeId" />
             <TextField source="bookId" />
-            <DateField sourde="rentDate" />
-            <DateField sourde="datePlanningReturn" />
+            <TextField sourde="rentDate" />
+            <TextField sourde="datePlanningReturn" />
             <NumberField source="daysAfterReturnDate" />
             <NumberField source="additionalCost" />
             <BooleanField source="isBack" />
