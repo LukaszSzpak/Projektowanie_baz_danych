@@ -33,9 +33,21 @@ import BookEdit from './books/BookEdit'
 import simpleRestProvider from 'ra-data-simple-rest'
 
 
+const [email, setEmail] = React.useState('');
+const [role, setRole] = React.useState('');
+
+const httpClient = (url, options = {}) => {
+  if (!options.headers) {
+      options.headers = new Headers({ Accept: 'application/json' });
+  }
+
+  options.headers.set('User-email', {email});
+  return fetchUtils.fetchJson(url, options);
+};
 
 
 const dataProvider = simpleRestProvider('http://localhost:8080/api');
+const wishListProvider = simpleRestProvider('http://localhost:8080/api', httpClient);
 
 {/**
 const App = () => (
@@ -54,7 +66,7 @@ function App() {
       <Switch>
 
       <Route exact path='/login'>
-        <Login/>
+        <Login setEmail={setEmail} setRole={setRole}/>
       </Route>
 
       <Route exact path='/register'>
@@ -99,7 +111,7 @@ function App() {
 
       <Route exact path='/wishlist'>
         <div>
-          <Admin dataProvider={dataProvider}>
+          <Admin dataProvider={wishListProvider}>
           <Resource name="wishlist" list={WishList} />
           </Admin>
       </div>
