@@ -61,7 +61,7 @@ export default function Register() {
                         <TextField id="email-input" label="email" onInput={ e =>setEmail(e.target.value)} />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField id="password-input" label="password" onInput={ e =>setPassword(e.target.value)} />
+                        <TextField id="password-input" label="password" type = "password" onInput={ e =>setPassword(e.target.value)} />
                     </Grid>
                     <Grid item xs={12}>
                         <Button type="submit" variant="contained" size="large" color="primary">Register</Button>

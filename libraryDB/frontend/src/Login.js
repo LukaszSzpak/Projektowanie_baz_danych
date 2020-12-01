@@ -48,7 +48,7 @@ export default function Login(props) {
                         <TextField id="email-input" label="email" onInput={ e =>setEmailInput(e.target.value)} />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField id="password-input" label="password" onInput={ e =>setPassword(e.target.value)} />
+                        <TextField id="password-input" type="password" label="password" onInput={ e =>setPassword(e.target.value)} />
                     </Grid>
                     <Grid item xs={12}>
                         <Button type="submit" onClick={handleLogin} variant="contained" size="large" color="primary">Login</Button>

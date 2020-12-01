@@ -118,6 +118,7 @@ function GetPanel(props) {
       <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
       <Resource name="employees" list = {EmployeeList} create={EmployeeCreate} edit={EmployeeEdit} />
       <Resource name="loans" list = {AdminTransactionList} create={TransactionCreate} edit={TransactionEdit} />
+      
     </Admin>)
     }
     else if (props.role === 'user') {
@@ -126,6 +127,7 @@ function GetPanel(props) {
         <Resource name="books" list = {BookList}/>
         <Resource name="wishlist" list = {WishList}/>
         <Resource name="loans" list = {TransactionList} />
+        
       </Admin>)
     }
     else if (props.role === 'librarian') {
@@ -134,6 +136,7 @@ function GetPanel(props) {
         <Resource name="books" list = {AdminBookList} create={BookCreate} edit={BookEdit} />
         <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
         <Resource name="loans" list = {AdminTransactionList} create={TransactionCreate} edit={TransactionEdit} />
+        
       </Admin>)
     }
     else {
