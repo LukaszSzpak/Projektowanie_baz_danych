@@ -13,7 +13,7 @@ import {Grid, Button} from '@material-ui/core'
 import PropTypes from 'prop-types';
 
 
-export const PostList = (props) => (
+export const WishList = (props) => (
     <List {...props}>
         <Datagrid>
             <NumberField source="id" />
@@ -27,4 +27,4 @@ export const PostList = (props) => (
     </List>
 );
 
-export default PostList
+export default WishList

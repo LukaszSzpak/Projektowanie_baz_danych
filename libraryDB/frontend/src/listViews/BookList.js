@@ -15,53 +15,12 @@ import {
 
 import {Grid, Button} from '@material-ui/core'
 import PropTypes from 'prop-types';
+import { Fragment, useState } from 'react';
+import AddToWishList from '.././customButtons/AddToWishList'
 
-const ListActions = (props) => {
-    const {
-        className,
-        exporter,
-        filters,
-        maxResults,
-        ...rest
-    } = props;
-    const {
-        currentSort,
-        resource,
-        displayedFilters,
-        filterValues,
-        hasCreate,
-        basePath,
-        selectedIds,
-        showFilter,
-        total,
-    } = useListContext();
-    return (
-        <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
-            {filters && cloneElement(filters, {
-                resource,
-                showFilter,
-                displayedFilters,
-                filterValues,
-                context: 'button',
-            })}
-            <ExportButton
-                disabled={total === 0}
-                resource={resource}
-                sort={currentSort}
-                filterValues={filterValues}
-                maxResults={maxResults}
-            />
-            <Button
-                /*Tutaj dodamy kod do dodawania do wish listy*/
-                onClick={() => { alert('Your custom action'); }}>
-                Add to wish list
-            </Button>
-        </TopToolbar>
-    );
-};
 
 const BookList = (props) => (
-    <List {...props} actions={<ListActions />}>
+    <List {...props} bulkActionButtons = {<PostBulkActionButtons/>}>
         <Datagrid>
             <NumberField source="id" />
             <TextField source="title" />
@@ -70,6 +29,12 @@ const BookList = (props) => (
             <TextField source="avalible" />
         </Datagrid>
     </List>
+);
+
+const PostBulkActionButtons = props => (
+    <Fragment>
+        <AddToWishList label="Add to wish list" {...props} />
+    </Fragment>
 );
 
 export default BookList

@@ -22,6 +22,6 @@ const UserList = (props) => (
             <DeleteButton/>
         </Datagrid>
     </List>
-)
+);
 
 export default UserList
