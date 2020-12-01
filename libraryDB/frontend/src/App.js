@@ -30,12 +30,12 @@ import UserEdit from './admin-account-system/UserEdit'
 import EmployeeEdit from './admin-account-system/EmployeeEdit'
 import BookEdit from './books/BookEdit'
 
-import restProvider from 'ra-data-simple-rest'
+import simpleRestProvider from 'ra-data-simple-rest'
 
 
 
 
-const dataProvider = restProvider('http://localhost:8080');
+const dataProvider = simpleRestProvider('http://localhost:8080/api');
 
 {/**
 const App = () => (
@@ -52,60 +52,60 @@ function App() {
   return (
     <div className="App">
       <Switch>
-    
-      <Route path='/login'>
+
+      <Route exact path='/login'>
         <Login/>
       </Route>
 
-      <Route path='/register'>
+      <Route exact path='/register'>
         <Register/>
       </Route>
 
-      <Route path='/user'>
+      <Route exact path='/user'>
         <UserMenu />
       </Route>
 
-      <Route path='/librarian'>
+      <Route exact path='/librarian'>
         <LibrarianMenu/>
       </Route>
 
-      <Route path='/admin'>
-        <AdminMenu />          
+      <Route exact path='/admin'>
+        <AdminMenu />
       </Route>
 
-      <Route path='/booklist'>
+      <Route exact path='/booklist'>
         <Admin dataProvider={dataProvider}>
           <Resource name="books" list={BooksList} />
-        </Admin>      
+        </Admin>
       </Route>
 
-      <Route path='/userlist'>
+      <Route exact path='/userlist'>
         <Admin dataProvider={dataProvider}>
           <Resource name="users" list={UserList} />
-        </Admin>      
+        </Admin>
       </Route>
 
-      <Route path='/employeelist'>
+      <Route exact path='/employeelist'>
         <Admin dataProvider={dataProvider}>
           <Resource name="employees" list={EmployeeList} />
-        </Admin>      
+        </Admin>
       </Route>
 
-      <Route path='/adminbooklist'>
+      <Route exact path='/adminbooklist'>
         <Admin dataProvider={dataProvider}>
           <Resource name="books" list={AdminBookList} />
-        </Admin>      
+        </Admin>
       </Route>
 
-      <Route path='/wishlist'>
-        <div> 
+      <Route exact path='/wishlist'>
+        <div>
           <Admin dataProvider={dataProvider}>
           <Resource name="wishlist" list={WishList} />
           </Admin>
-      </div>      
+      </div>
       </Route>
     </Switch>
-      
+
 
     </div>
   );

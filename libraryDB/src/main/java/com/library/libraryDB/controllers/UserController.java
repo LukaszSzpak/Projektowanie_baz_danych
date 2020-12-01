@@ -34,7 +34,7 @@ public class UserController {
         List<User> userList = userService.getAllUsers();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=UTF-8");
-        headers.add("Content-Range", ("users 0-" + userList.size() + "/" + userList.size()));
+        headers.add("Content-Range", ("user 0-" + userList.size() + "/" + userList.size()));
         return new ResponseEntity<>(userList, headers, HttpStatus.OK);
     }
 

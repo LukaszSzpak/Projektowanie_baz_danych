@@ -4,6 +4,7 @@ import com.library.libraryDB.dto.CreateBookDto;
 import com.library.libraryDB.entities.Book;
 import com.library.libraryDB.services.Interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +29,14 @@ public class BookController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/books")
+    @GetMapping(value = "/books{nothing}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Book>> getBooks() {
-        return new ResponseEntity<>(bookService.getBooks(), HttpStatus.OK);
+        List<Book> bookList = bookService.getBooks();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=UTF-8");
+        headers.add("Content-Range", ("book 0-" + bookList.size() + "/" + bookList.size()));
+        return new ResponseEntity<>(bookList, headers, HttpStatus.OK);
     }
 
     @PostMapping(value = "/book")
