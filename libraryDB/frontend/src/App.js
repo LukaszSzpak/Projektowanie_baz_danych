@@ -59,6 +59,14 @@ function App() {
         return fetchUtils.fetchJson(url, options);
     };
 
+    function handleEmailChange(value){
+      setEmail(value);
+    }
+
+    function handleRoleChange(value){
+      setRole(value);
+    }
+
 
     const dataProvider = simpleRestProvider('http://localhost:8080/api');
     const wishListProvider = simpleRestProvider('http://localhost:8080/api', httpClient);
@@ -68,7 +76,7 @@ function App() {
       <Switch>
 
       <Route exact path='/login'>
-        <Login setEmail={setEmail} setRole={setRole}/>
+        <Login setEmail={handleEmailChange} setRole={handleRoleChange}/>
       </Route>
 
       <Route exact path='/register'>
