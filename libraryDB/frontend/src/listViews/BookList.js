@@ -26,7 +26,7 @@ const BookList = (props) => (
             <TextField source="title" />
             <TextField source="author" />
             <TextField source="description" />
-            <TextField source="avalible" />
+            <BooleanField source="available" />
         </Datagrid>
     </List>
 );

@@ -11,6 +11,7 @@ import {
     CreateButton,
     TopToolbar,
     sanitizeListRestProps,
+    EditButton,
     DeleteButton
 } from 'react-admin';
 import {Grid, Button} from '@material-ui/core'
@@ -27,6 +28,7 @@ export const PostList = (props) => (
             <BooleanField source="avalible" />
             <ExportButton></ExportButton>
             <CreateButton></CreateButton>
+            <EditButton> basePath = {'/books/edit/'}</EditButton>
             <DeleteButton></DeleteButton>
         </Datagrid>
     </List>

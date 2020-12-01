@@ -35,15 +35,6 @@ import simpleRestProvider from 'ra-data-simple-rest'
 
 
 
-{/**
-const App = () => (
-  <Admin dataProvider={dataProvider}>
-      <Resource name="books" create={BookCreate} edit={BookEdit} />
-      <Resource name="users" create={UserCreate} edit={UserEdit} />
-      <Resource name="employees" create={EmployeeCreate} edit={EmployeeEdit} />
-  </Admin>
-);
-*/}
 
 
 function App() {
@@ -83,10 +74,13 @@ function App() {
         <Register/>
       </Route>
 
+      {/**
       <Route exact path='/user'>
         <UserMenu />
         <p>Email: {email}</p>
       </Route>
+      */}
+      
 
       <Route exact path='/librarian'>
         <LibrarianMenu/>
@@ -96,17 +90,19 @@ function App() {
         <AdminMenu />
       </Route>
 
-      <Route exact path='/booklist'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="books" list={BooksList} />
-        </Admin>
-      </Route>
-
-      <Route exact path='/userlist'>
+      {/*
         <Admin dataProvider={dataProvider}>
           <Resource name="users" list={UserList} />
         </Admin>
-      </Route>
+
+
+        <Admin dataProvider={dataProvider}>
+          <Resource name="books" list={BooksList} />
+        </Admin>
+     
+      
+
+        
 
       <Route exact path='/employeelist'>
         <Admin dataProvider={dataProvider}>
@@ -127,6 +123,18 @@ function App() {
           </Admin>
       </div>
       </Route>
+      <Resource name="books" list = {BooksList} create={BookCreate} edit={BookEdit} />
+          <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
+          <Resource name="employees" list = {EmployeeList} create={EmployeeCreate} edit={EmployeeEdit} />
+ */}
+
+    <Route exact path='/home'>
+      <div>
+        <GetPanel role = {role} dataProvider = {dataProvider}/>
+      </div>
+    </Route>
+      
+
     </Switch>
 
 
@@ -134,6 +142,36 @@ function App() {
   );
 }
 
+
+function GetPanel(props) {
+  if (props.role === 'admin') {
+    return (
+    <Admin dataProvider={props.dataProvider}>
+      <Resource name="books" list = {AdminBookList} create={BookCreate} edit={BookEdit} />
+      <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
+      <Resource name="employees" list = {EmployeeList} create={EmployeeCreate} edit={EmployeeEdit} />
+    </Admin>)
+    }
+    else if (props.role === 'user') {
+      return (
+      <Admin dataProvider={props.dataProvider}>
+        <Resource name="books" list = {BooksList}/>
+        <Resource name="wishlist" list = {WishList}/>
+      </Admin>)
+    }
+    else if (props.role === 'librarian') {
+      return (
+      <Admin dataProvider={props.dataProvider}>
+        <Resource name="books" list = {AdminBookList} create={BookCreate} edit={BookEdit} />
+        <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
+      </Admin>)
+    }
+    else {
+      return (
+      <h1>SIEMKA</h1>
+      )
+    }
+}
 export default App
 
 
