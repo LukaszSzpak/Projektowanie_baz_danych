@@ -18,9 +18,9 @@ public class UserServiceImpl implements UserService {
     private BookRepository bookRepository;
 
     @Override
-    public User getUserById(String email) {
-        if(userRepository.findById(email).isPresent())
-            return userRepository.findById(email).get();
+    public User getUserById(String id) {
+        if(userRepository.findById(id).isPresent())
+            return userRepository.findById(id).get();
         else
             return null;
     }
@@ -36,9 +36,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user, String email) {
-        if(userRepository.findById(email).isPresent()) {
-            User resultUser = userRepository.findById(email).get();
+    public User updateUser(User user, String id) {
+        if(userRepository.findById(id).isPresent()) {
+            User resultUser = userRepository.findById(id).get();
             resultUser.setName(user.getName());
             resultUser.setSurname(user.getSurname());
             resultUser.setPassword(user.getPassword());
@@ -49,9 +49,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(String email) {
-        if (userRepository.findById(email).isPresent()) {
-            userRepository.deleteById(email);
+    public boolean deleteUser(String id) {
+        if (userRepository.findById(id).isPresent()) {
+            userRepository.deleteById(id);
             return true;
         }
         return false;

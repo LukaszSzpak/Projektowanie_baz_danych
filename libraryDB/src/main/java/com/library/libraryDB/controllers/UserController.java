@@ -1,7 +1,6 @@
 package com.library.libraryDB.controllers;
 
-import com.library.libraryDB.dto.UserWithIdDto;
-import com.library.libraryDB.entities.Book;
+import com.library.libraryDB.dto.CreateUserDto;
 import com.library.libraryDB.entities.Item;
 import com.library.libraryDB.entities.User;
 import com.library.libraryDB.services.Interfaces.ItemService;
@@ -24,7 +23,7 @@ public class UserController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping(value = "/user/{email}")
+    @GetMapping(value = "/users/{email}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> getUser(@PathVariable(value = "email") String email) {
         User user = userService.getUserById(email);
@@ -37,22 +36,22 @@ public class UserController {
 
     @GetMapping(value = "/users")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<UserWithIdDto>> listAllUsers() {
+    public ResponseEntity<List<User>> listAllUsers() {
         List<User> userList = userService.getAllUsers();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=UTF-8");
         headers.add("Content-Range", ("user 0-" + userList.size() + "/" + userList.size()));
 
-        return new ResponseEntity<>(new UserWithIdDto().parseUsersList(userList), headers, HttpStatus.OK);
+        return new ResponseEntity<>(userList, headers, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/user")
+    @PostMapping(value = "/users")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User resultUser = userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody CreateUserDto createUserDto) {
+        User resultUser = userService.createUser(createUserDto.parseToUser(userService));
 
         if (resultUser != null)
-            return new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
+            return new ResponseEntity<>(resultUser, HttpStatus.OK);
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 

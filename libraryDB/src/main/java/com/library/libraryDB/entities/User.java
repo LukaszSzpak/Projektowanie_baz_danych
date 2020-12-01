@@ -21,6 +21,7 @@ public class User {
      */
 
     @Id
+    private String id;
     private String email;
     private String name;
     private String surname;
@@ -29,7 +30,8 @@ public class User {
 
     public User() { }
 
-    public User(String name, String surname, String email, String password){
+    public User(String id, String name, String surname, String email, String password){
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -37,7 +39,8 @@ public class User {
         this.wishList = new LinkedList<>();
     }
 
-    public User(String name, String surname, String email, String password, List<String> wishList) {
+    public User(String id, String name, String surname, String email, String password, List<String> wishList) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -45,6 +48,13 @@ public class User {
         this.wishList = wishList;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

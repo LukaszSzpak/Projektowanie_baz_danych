@@ -1,22 +1,19 @@
 package com.library.libraryDB.dto;
 
 import com.library.libraryDB.entities.User;
+import com.library.libraryDB.services.Interfaces.UserService;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserWithIdDto {
-    private String id;
+public class CreateUserDto {
     private String email;
     private String name;
     private String surname;
     private String password;
-    private List<String> wishList;
+    private List<String> wishList = new LinkedList<>();
 
-    public UserWithIdDto() {
-    }
-    public UserWithIdDto(String id, String email, String name, String surname, String password, List<String> wishList) {
-        this.id = id;
+    public CreateUserDto(String email, String name, String surname, String password, List<String> wishList) {
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -24,12 +21,7 @@ public class UserWithIdDto {
         this.wishList = wishList;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public CreateUserDto() {
     }
 
     public String getEmail() {
@@ -72,15 +64,9 @@ public class UserWithIdDto {
         this.wishList = wishList;
     }
 
-    public List<UserWithIdDto> parseUsersList(List<User> userList) {
-        LinkedList<UserWithIdDto> resultList = new LinkedList<>();
-        int id = 1;
+    public User parseToUser(UserService userService) {
+        int len = Integer.parseInt(userService.getAllUsers().get(userService.getAllUsers().size() - 1).getId());
 
-        for (User user : userList) {
-            resultList.add(new UserWithIdDto(String.valueOf(id), user.getEmail(), user.getName(), user.getSurname(), user.getPassword(), user.getWishList()));
-            id++;
-        }
-
-        return resultList;
+        return new User(String.valueOf(len + 1), this.name, this.surname, this.email, this.password, this.wishList);
     }
 }

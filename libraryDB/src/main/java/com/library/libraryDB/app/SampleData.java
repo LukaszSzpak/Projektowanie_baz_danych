@@ -45,6 +45,7 @@ public class SampleData {
 
     private void addUsers() {
         User user1 = new User(
+                "1",
                 "Lukasz",
                 "Szpak",
                 "alukasz1@interia.pl",
@@ -53,12 +54,14 @@ public class SampleData {
         mongoTemplate.save(user1);
 
         mongoTemplate.save(new User(
+                "2",
                 "Piotr",
                 "Bobeł",
                 "piotr_bobel@gmail.com",
                 "pass2"));
 
         mongoTemplate.save(new User(
+                "3",
                 "Piotr",
                 "Augustowski",
                 "piotr_augustowski@gmail.com",
