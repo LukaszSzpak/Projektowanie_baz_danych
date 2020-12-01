@@ -12,19 +12,17 @@ import {List,
     CreateButton,
     } from 'react-admin'
 
-const UserList = () => (props) => {
-    return(
-        <List {...props} title="Users">
-            <Datagrid>
-                <TextField source='id'/>
-                <TextField source='name'/>
-                <TextField source='surname'/>
-                <TextField source='email'/>
-                <EditButton/>
-                <DeleteButton/>
-            </Datagrid>
-        </List>
-    );
-}
+const UserList = (props) => (
+    <List {...props} title="Users">
+        <Datagrid>
+            <TextField source='id'/>
+            <TextField source='name'/>
+            <TextField source='surname'/>
+            <TextField source='email'/>
+            <EditButton/>
+            <DeleteButton/>
+        </Datagrid>
+    </List>
+)
 
 export default UserList

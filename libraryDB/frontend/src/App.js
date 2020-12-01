@@ -55,7 +55,7 @@ function App() {
             options.headers = new Headers({ Accept: 'application/json' });
         }
         console.log(email)
-        options.headers.set('User-email', {email});
+        options.headers.set('User-email', email);
         return fetchUtils.fetchJson(url, options);
     };
 
@@ -85,6 +85,7 @@ function App() {
 
       <Route exact path='/user'>
         <UserMenu />
+        <p>Email: {email}</p>
       </Route>
 
       <Route exact path='/librarian'>

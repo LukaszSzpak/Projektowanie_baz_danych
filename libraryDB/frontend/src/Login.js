@@ -21,8 +21,8 @@ export default function Login(props) {
                         response.json()
                             .then(account =>{
                                 let userRole = account.hasOwnProperty("role") ? account["role"] : "user";
-                                setRole = userRole;
-                                setEmail = account["email"];
+                                setRole(userRole);
+                                setEmail(account["email"]);
                                 history.push(`/${userRole}`);
                             })
                     }
