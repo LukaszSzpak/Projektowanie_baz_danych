@@ -28,7 +28,7 @@ export const PostList = (props) => (
             <BooleanField source="avalible" />
             <ExportButton></ExportButton>
             <CreateButton></CreateButton>
-            <EditButton> basePath = {'/books/edit/'}</EditButton>
+            <EditButton></EditButton>
             <DeleteButton></DeleteButton>
         </Datagrid>
     </List>

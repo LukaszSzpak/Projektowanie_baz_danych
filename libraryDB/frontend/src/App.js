@@ -167,8 +167,8 @@ function GetPanel(props) {
       </Admin>)
     }
     else {
-      return (
-      <h1>SIEMKA</h1>
+      return(
+        <h1>Login or sign up</h1>
       )
     }
 }
