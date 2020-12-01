@@ -23,7 +23,8 @@ export default function Login(props) {
                                 let userRole = account.hasOwnProperty("role") ? account["role"] : "user";
                                 setRole(userRole);
                                 setEmail(account["email"]);
-                                history.push(`/${userRole}`);
+                                history.push('/home');
+                                //history.push(`/${userRole}`);
                             })
                     }
                     else {
