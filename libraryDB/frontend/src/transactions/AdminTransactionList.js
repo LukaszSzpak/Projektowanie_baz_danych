@@ -23,7 +23,7 @@ import PropTypes from 'prop-types';
 import { Fragment, useState } from 'react';
 
 
-const TransactionList = (props) => (
+const AdminTransactionList = (props) => (
     <List {...props}>
         <Datagrid>
             <NumberField source="id" />
@@ -41,4 +41,4 @@ const TransactionList = (props) => (
     </List>
 );
 
-export default TransactionList
+export default AdminTransactionList

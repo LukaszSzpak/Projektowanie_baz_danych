@@ -29,8 +29,8 @@ const TransactionList = (props) => (
             <TextField source="userId" />
             <TextField source="employeeId" />
             <TextField source="bookId" />
-            <TextField sourde="rentDate" />
-            <TextField sourde="datePlanningReturn" />
+            <DateField sourde="rentDate" />
+            <DateField sourde="datePlanningReturn" />
             <NumberField source="daysAfterReturnDate" />
             <NumberField source="additionalCost" />
             <BooleanField source="isBack" />

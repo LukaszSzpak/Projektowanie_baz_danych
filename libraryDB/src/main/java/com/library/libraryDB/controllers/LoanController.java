@@ -4,9 +4,11 @@ import com.library.libraryDB.dto.CreateLoanDto;
 import com.library.libraryDB.entities.Loan;
 import com.library.libraryDB.services.Interfaces.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sun.plugin.javascript.navig.Link;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class LoanController {
     @Autowired
     private LoanService loanService;
 
-    @GetMapping(value = "/loan/{id}")
+    @GetMapping(value = "/loans/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Loan> getLoan(@PathVariable(value = "id") String id) {
         Loan tempLoan = loanService.getLoan(id);
@@ -26,13 +28,13 @@ public class LoanController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(value = "/loan")
+    @PostMapping(value = "/loans")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Loan> createLoan(@RequestBody CreateLoanDto createLoanDto) {
         return new ResponseEntity<>(loanService.createLoan(createLoanDto), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/loan/{id}")
+    @PutMapping(value = "/loans/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Loan> updateLoan(@PathVariable(value = "id") String id,
                                            @RequestBody Loan loan) {
@@ -43,9 +45,26 @@ public class LoanController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/loan/getList?userId={userId}")
+    @GetMapping(value = "/loans/getList?userId={userId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Loan>> getUserLoanList(@PathVariable(value = "userId") String userId) {
         return new ResponseEntity<>(loanService.getUserLoanList(userId), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/loans")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Loan>> getAllLoans() {
+        List<Loan> loanList = loanService.getAllLoans();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=UTF-8");
+
+        if (loanList != null) {
+            headers.add("Content-Range", ("employee 0-" + loanList.size() + "/" + loanList.size()));
+            return new ResponseEntity<>(loanList, headers, HttpStatus.OK);
+        }
+
+        headers.add("Content-Range", ("employee 0-0/0"));
+        return new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
     }
 }

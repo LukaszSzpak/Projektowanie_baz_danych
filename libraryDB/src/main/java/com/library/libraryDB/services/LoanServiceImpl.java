@@ -11,6 +11,7 @@ import com.library.libraryDB.services.Interfaces.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -100,5 +101,10 @@ public class LoanServiceImpl implements LoanService {
 
             bookRepository.save(tempBook);
         }
+    }
+
+    @Override
+    public List<Loan> getAllLoans() {
+        return loanRepository.findAll();
     }
 }

@@ -107,7 +107,7 @@ function GetPanel(props) {
       <Admin dataProvider={props.dataProvider}>
         <Resource name="books" list = {BooksList}/>
         <Resource name="wishlist" list = {WishList}/>
-        <Resource name="loans/{email}" list = {TransactionList} />
+        <Resource name="loans" list = {TransactionList} />
       </Admin>)
     }
     else if (props.role === 'librarian') {

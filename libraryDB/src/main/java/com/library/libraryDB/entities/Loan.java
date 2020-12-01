@@ -48,6 +48,20 @@ public class Loan {
         this.additionalCost = (float) 0;
     }
 
+    public Loan(String id, String userId, String employeeId, String bookId, String itemId, Date rentDate,
+                Date datePlanningReturn, int daysAfterReturnDate, float additionalCost, boolean isBack) {
+        this.id = id;
+        this.userId = userId;
+        this.employeeId = employeeId;
+        this.bookId = bookId;
+        this.itemId = itemId;
+        this.rentDate = rentDate;
+        this.datePlanningReturn = datePlanningReturn;
+        this.daysAfterReturnDate = daysAfterReturnDate;
+        this.additionalCost = additionalCost;
+        this.isBack = isBack;
+    }
+
     public String getId() {
         return id;
     }
