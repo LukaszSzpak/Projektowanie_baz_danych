@@ -18,11 +18,10 @@ import {
 import {Grid, Button} from '@material-ui/core'
 import PropTypes from 'prop-types';
 import { Fragment, useState } from 'react';
-import AddToWishList from '.././customButtons/AddToWishList'
 
 
-const BookList = (props) => (
-    <List {...props} bulkActionButtons = {<BookBulkActionButtons/>} filters = {<BookFilter />}>
+const GuestBookList = (props) => (
+    <List {...props} filters = {<BookFilter />}>
         <Datagrid>
             <NumberField source="id" />
             <TextField source="title" />
@@ -33,12 +32,6 @@ const BookList = (props) => (
     </List>
 );
 
-const BookBulkActionButtons = props => (
-    <Fragment>
-        <AddToWishList label="Add to wish list" {...props} />
-    </Fragment>
-);
-
 const BookFilter = (props) => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
@@ -46,4 +39,4 @@ const BookFilter = (props) => (
     </Filter>
 );
 
-export default BookList
+export default GuestBookList

@@ -20,6 +20,10 @@ import AdminBookList from './listViews/AdminBookList'
 import WishList from './listViews/WishList'
 import TransactionList from './transactions/TransactionList'
 import AdminTransactionList from './transactions/AdminTransactionList'
+import GuestBookList from './listViews/GuestBookList'
+
+//Views
+import LoginView from './menus/LoginView'
 
 //Creations
 import EmployeeCreate from './admin-account-system/EmployeeCreate'
@@ -93,6 +97,13 @@ function App() {
           <GetPanel role = {role} dataProvider = {dataProvider}/>
         </div>
       </Route>
+
+      <Route exact path='/'>
+        <div>
+          <LoginView />
+        </div>
+      </Route>
+      
     </Switch>
   </div>
   );
@@ -127,10 +138,14 @@ function GetPanel(props) {
     }
     else {
       return(
-        <h1>Login or sign up</h1>
+        <Admin dataProvider={props.dataProvider}>
+          <Resource name="books" label = "Our books!" list = {GuestBookList}/>
+        </Admin>
       )
     }
 }
+
+
 export default App
 
 

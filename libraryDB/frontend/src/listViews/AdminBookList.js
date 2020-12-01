@@ -25,7 +25,7 @@ export const AdminBookList = (props) => (
             <TextField source="title" />
             <TextField source="author" />
             <TextField source="description" />
-            <BooleanField source="avaliable" />
+            <BooleanField source="available" />
             <EditButton></EditButton>
             <DeleteButton></DeleteButton>
         </Datagrid>
