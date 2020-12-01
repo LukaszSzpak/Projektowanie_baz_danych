@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 
 
 export const AdminBookList = (props) => (
-    <List {...props}>
+    <List {...props} filters={BookFilter}>
         <Datagrid>
             <NumberField source="id" />
             <TextField source="title" />
@@ -30,6 +30,13 @@ export const AdminBookList = (props) => (
             <DeleteButton></DeleteButton>
         </Datagrid>
     </List>
+);
+
+const BookFilter = (props) => (
+    <Filter {...props}>
+        <TextInput label="Search" source="q" alwaysOn />
+        <TextInput label="Title" source="title" defaultValue="Hello, World!" />
+    </Filter>
 );
 
 export default AdminBookList
