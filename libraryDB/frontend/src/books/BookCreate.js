@@ -6,7 +6,6 @@ export default function BookCreate(props) {
     return(
         <Create title='Create book' {...props}>
             <SimpleForm>
-                <TextInput source='id'/>
                 <TextInput source='title'/>
                 <TextInput source='author'/>
                 <TextInput source='description'/>
