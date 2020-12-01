@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import {Edit, SimpleForm, TextInput, SelectInput } from 'react-admin'
 import roleContext from '../RoleContext'
 
-export default function AccountEdit(props) {
+export default function UserEdit(props) {
 
     return(
         <Edit title='Edit account' {...props}>
