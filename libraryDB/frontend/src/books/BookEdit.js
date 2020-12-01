@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import {Edit, SimpleForm, TextInput, SelectInput } from 'react-admin'
 
-export default function AccountEdit(props) {
+export default function BookEdit(props) {
 
     return(
         <Edit title='Edit book' {...props}>

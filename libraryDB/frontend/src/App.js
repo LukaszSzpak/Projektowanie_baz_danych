@@ -5,8 +5,7 @@ import Register from './Register'
 import {roleContext} from "./RoleContext"
 import * as React from "react";
 
-import { Admin, Resource, fetchUtils } from 'react-admin';
-import localStorageDataProvider from 'ra-data-local-storage';
+import { Admin, Resource, fetchUtils, email } from 'react-admin';
 
 //Menus
 import AdminMenu from './menus/AdminMenu'
@@ -19,22 +18,22 @@ import EmployeeList from './admin-account-system/EmployeeList'
 import BooksList from './listViews/BookList'
 import AdminBookList from './listViews/AdminBookList'
 import WishList from './listViews/WishList'
+import TransactionList from './transactions/TransactionList'
+import AdminTransactionList from './transactions/AdminTransactionList'
 
 //Creations
 import EmployeeCreate from './admin-account-system/EmployeeCreate'
 import UserCreate from './admin-account-system/UserCreate'
 import BookCreate from './books/BookCreate'
+import TransactionCreate from './transactions/TransactionCreate'
 
 //Editions
 import UserEdit from './admin-account-system/UserEdit'
 import EmployeeEdit from './admin-account-system/EmployeeEdit'
 import BookEdit from './books/BookEdit'
+import TransactionEdit from './transactions/TransactionEdit'
 
 import simpleRestProvider from 'ra-data-simple-rest'
-
-
-
-
 
 
 function App() {
@@ -74,14 +73,6 @@ function App() {
         <Register/>
       </Route>
 
-      {/**
-      <Route exact path='/user'>
-        <UserMenu />
-        <p>Email: {email}</p>
-      </Route>
-      */}
-      
-
       <Route exact path='/librarian'>
         <LibrarianMenu/>
       </Route>
@@ -90,55 +81,13 @@ function App() {
         <AdminMenu />
       </Route>
 
-      {/*
-        <Admin dataProvider={dataProvider}>
-          <Resource name="users" list={UserList} />
-        </Admin>
-
-
-        <Admin dataProvider={dataProvider}>
-          <Resource name="books" list={BooksList} />
-        </Admin>
-     
-      
-
-        
-
-      <Route exact path='/employeelist'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="employees" list={EmployeeList} />
-        </Admin>
-      </Route>
-
-      <Route exact path='/adminbooklist'>
-        <Admin dataProvider={dataProvider}>
-          <Resource name="books" list={AdminBookList} />
-        </Admin>
-      </Route>
-
-      <Route exact path='/wishlist'>
+      <Route exact path='/home'>
         <div>
-          <Admin dataProvider={wishListProvider}>
-          <Resource name="wishlist" list={WishList} />
-          </Admin>
-      </div>
+          <GetPanel role = {role} dataProvider = {dataProvider}/>
+        </div>
       </Route>
-      <Resource name="books" list = {BooksList} create={BookCreate} edit={BookEdit} />
-          <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
-          <Resource name="employees" list = {EmployeeList} create={EmployeeCreate} edit={EmployeeEdit} />
- */}
-
-    <Route exact path='/home'>
-      <div>
-        <GetPanel role = {role} dataProvider = {dataProvider}/>
-      </div>
-    </Route>
-      
-
     </Switch>
-
-
-    </div>
+  </div>
   );
 }
 
@@ -150,6 +99,7 @@ function GetPanel(props) {
       <Resource name="books" list = {AdminBookList} create={BookCreate} edit={BookEdit} />
       <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
       <Resource name="employees" list = {EmployeeList} create={EmployeeCreate} edit={EmployeeEdit} />
+      <Resource name="loans" list = {AdminTransactionList} create={TransactionCreate} edit={TransactionEdit} />
     </Admin>)
     }
     else if (props.role === 'user') {
@@ -157,6 +107,7 @@ function GetPanel(props) {
       <Admin dataProvider={props.dataProvider}>
         <Resource name="books" list = {BooksList}/>
         <Resource name="wishlist" list = {WishList}/>
+        <Resource name="loans/{email}" list = {TransactionList} />
       </Admin>)
     }
     else if (props.role === 'librarian') {
@@ -164,6 +115,7 @@ function GetPanel(props) {
       <Admin dataProvider={props.dataProvider}>
         <Resource name="books" list = {AdminBookList} create={BookCreate} edit={BookEdit} />
         <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
+        <Resource name="loans" list = {AdminTransactionList} create={TransactionCreate} edit={TransactionEdit} />
       </Admin>)
     }
     else {
