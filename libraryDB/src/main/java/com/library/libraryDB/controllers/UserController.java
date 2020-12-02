@@ -76,9 +76,9 @@ public class UserController {
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/user/addBook?bookId={bookId}")
+    @PutMapping(value = "/user/addBook")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> addBookToWishList(@PathVariable(value = "bookId") String bookId,
+    public ResponseEntity<User> addBookToWishList(@RequestHeader("Book-id") String bookId,
                                                   @RequestBody User user) {
         User resultUser = userService.addBookToWishList(user, bookId);
 
