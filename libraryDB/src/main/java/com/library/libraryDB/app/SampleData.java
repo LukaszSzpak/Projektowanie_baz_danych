@@ -134,7 +134,7 @@ public class SampleData {
         mongoTemplate.save(new Loan(
                 "1",
                 "1",
-                "pracownik1@gmail.com",
+                "1",
                 "2",
                 "3",
                 sdf1.parse("2020.11.29"),
@@ -144,7 +144,7 @@ public class SampleData {
         mongoTemplate.save(new Loan(
                 "2",
                 "2",
-                "pracownik1@gmail.com",
+                "1",
                 "3",
                 "6",
                 sdf1.parse("2020.11.30"),
