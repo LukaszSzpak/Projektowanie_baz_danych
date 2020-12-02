@@ -25,10 +25,10 @@ public class UserController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping(value = "/users/{email}")
+    @GetMapping(value = "/users/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> getUser(@PathVariable(value = "email") String email) {
-        User user = userService.getUserById(email);
+    public ResponseEntity<User> getUser(@PathVariable(value = "id") String id) {
+        User user = userService.getUserById(id);
 
         if (user != null)
             return new ResponseEntity<>(user, HttpStatus.OK);
@@ -57,21 +57,21 @@ public class UserController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/user/{email}")
+    @PutMapping(value = "/user/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> updateUser(@RequestBody User user,
-                                           @PathVariable(value = "email") String email) {
-        User resultUser = userService.updateUser(user, email);
+                                           @PathVariable(value = "id") String id) {
+        User resultUser = userService.updateUser(user, id);
 
         if (resultUser != null)
             return new ResponseEntity<>(resultUser, HttpStatus.OK);
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(value = "/user/{email}")
+    @DeleteMapping(value = "/user/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Boolean> deleteUser(@PathVariable(value = "email") String email) {
-        if (userService.deleteUser(email))
+    public ResponseEntity<Boolean> deleteUser(@PathVariable(value = "id") String id) {
+        if (userService.deleteUser(id))
             return new ResponseEntity<>(true, HttpStatus.OK);
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
