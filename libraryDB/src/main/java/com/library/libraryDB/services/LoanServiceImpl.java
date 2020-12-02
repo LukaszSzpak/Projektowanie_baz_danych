@@ -39,8 +39,9 @@ public class LoanServiceImpl implements LoanService {
                 maxId = Integer.parseInt(loan.getId());
         }
 
-        Loan tempLoan = createLoanDto.makeLoan(String.valueOf(maxId));
+        Loan tempLoan = createLoanDto.makeLoan(String.valueOf(maxId + 1));
         checkBookAndItemAvailable(tempLoan);
+        loanRepository.save(tempLoan);
 
         return tempLoan;
     }
