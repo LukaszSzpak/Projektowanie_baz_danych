@@ -65,11 +65,11 @@ public class LoanController {
         headers.add("Content-Type", "application/json; charset=UTF-8");
 
         if (loanList != null) {
-            headers.add("Content-Range", ("employee 0-" + loanList.size() + "/" + loanList.size()));
+            headers.add("Content-Range", ("loans 0-" + loanList.size() + "/" + loanList.size()));
             return new ResponseEntity<>(loanList, headers, HttpStatus.OK);
         }
 
-        headers.add("Content-Range", ("employee 0-0/0"));
+        headers.add("Content-Range", ("loans 0-0/0"));
         return new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
     }
 }

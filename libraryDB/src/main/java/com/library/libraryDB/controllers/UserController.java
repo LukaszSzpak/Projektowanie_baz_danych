@@ -91,7 +91,8 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Book>> getWishList(@RequestHeader("User-id") String id) {
         User resultUser = userService.getUserById(id);
-            System.out.println(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=UTF-8");
 
         if (resultUser != null) {
             LinkedList<Book> itemLinkedList = new LinkedList<>();
@@ -99,15 +100,13 @@ public class UserController {
             for (String bookId : resultUser.getWishList())
                 itemLinkedList.add(bookService.getBook(bookId));
 
-            System.out.println(itemLinkedList);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Type", "application/json; charset=UTF-8");
             headers.add("Content-Range", ("item 0-" + itemLinkedList.size() + "/" + itemLinkedList.size()));
 
             return new ResponseEntity<>(itemLinkedList, headers, HttpStatus.OK);
-        } else
-            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
+
+        headers.add("Content-Range", ("item 0-0/0"));
+        return new ResponseEntity<>(null, headers, HttpStatus.OK);
     }
 
 }
