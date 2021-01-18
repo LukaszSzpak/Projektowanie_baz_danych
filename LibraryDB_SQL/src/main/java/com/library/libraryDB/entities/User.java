@@ -75,4 +75,12 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Set<Book> getWishList() {
+        return wishList;
+    }
+
+    public void setWishList(Set<Book> wishList) {
+        this.wishList = wishList;
+    }
 }
