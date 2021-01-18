@@ -26,7 +26,6 @@ export default function Login(props) {
                                 setEmail(account["email"]);
                                 setId(account["id"]);
                                 history.push('/home');
-                                //history.push(`/${userRole}`);
                             })
                     }
                     else {

@@ -18,7 +18,7 @@ import {
 import {Grid, Button} from '@material-ui/core'
 import PropTypes from 'prop-types';
 import { Fragment, useState } from 'react';
-import AddToWishList from '.././customButtons/AddToWishList'
+import AddToWishList from '../customButtons/AddToWishList'
 
 
 const BookList = (props) => (
