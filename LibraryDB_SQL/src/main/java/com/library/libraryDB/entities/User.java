@@ -1,59 +1,47 @@
 package com.library.libraryDB.entities;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import org.springframework.data.annotation.AccessType;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.ReadOnlyProperty;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="user")
-public class User {
-    /*
-    email - string - id
-    name - string
-    surname - string
-    password - string
-    wish_list - List<String> (Book_Id)
-     */
+@Entity
+public class User implements Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String surname;
+
+    @Column(nullable = false)
     private String password;
-    private List<String> wishList = new LinkedList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "wish_list",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private Set<Book> wishList;
 
     public User() { }
 
-    public User(String id, String name, String surname, String email, String password){
+    public User(Long id, String name, String surname, String email, String password){
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.wishList = new LinkedList<>();
     }
 
-    public User(String id, String name, String surname, String email, String password, List<String> wishList) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.wishList = wishList;
-    }
-
-    public String getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -87,17 +75,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public List<String> getWishList() {
-        return wishList;
-    }
-
-    public void setWishList(List<String> wishList) {
-        this.wishList = wishList;
-    }
-
-    public void addToWishList(String element) {
-        this.wishList.add(element);
-    }
-
 }
