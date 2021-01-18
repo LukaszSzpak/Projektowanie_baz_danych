@@ -33,7 +33,7 @@ const TransactionList = (props) => (
             <DateField sourde="datePlanningReturn" />
             <NumberField source="daysAfterReturnDate" />
             <NumberField source="additionalCost" />
-            <BooleanField source="isBack" />
+            <BooleanField source="back" />
         </Datagrid>
     </List>
 );
