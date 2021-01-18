@@ -1,41 +1,42 @@
 package com.library.libraryDB.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
-import java.util.LinkedList;
-import java.util.List;
-
-@Document(collection = "book")
-public class Book {
-    /*
-    id - string
-    title - string [255]
-    author - string [255]
-    description - string [>255]
-    available - true / false
-    item_list - list with Items
-     */
+@Entity
+public class Book implements Serializable{
 
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String author;
+
+    @Column(nullable = false)
     private String description;
+
+    @Column
     private boolean available = true;
-    private List<String> itemList = new LinkedList<>();
+
+    @ManyToMany(mappedBy = "wishList")
+    private Set<User> userWishList;
 
     public Book() {
     }
 
-    public Book(String id, String title, String author, String description) {
+    public Book(Long id, String title, String author, String description) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.description = description;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -55,10 +56,6 @@ public class Book {
         return available;
     }
 
-    public List<String> getItemList() {
-        return itemList;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -73,40 +70,5 @@ public class Book {
 
     public void setAvailable(boolean available) {
         this.available = available;
-    }
-
-    public void setItemList(List<String> itemList) {
-        this.itemList = itemList;
-    }
-
-    public String getItemFromList(int position) {
-        try {
-            return this.itemList.get(position);
-        } catch (Exception e) {
-            return null;
-        }
-
-    }
-
-    public void addItemToList(String item) {
-        this.itemList.add(item);
-    }
-
-    public boolean deleteItemFromList(String item) {
-        try {
-            this.itemList.remove(item);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean deleteItemFromList(int position) {
-        try {
-            this.itemList.remove(position);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 }
