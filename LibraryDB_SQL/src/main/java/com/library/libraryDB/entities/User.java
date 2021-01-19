@@ -24,10 +24,6 @@ public class User implements Serializable {
     private String password;
 
     @ManyToMany
-    @JoinTable(
-            name = "wish_list",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> wishList;
 
     public User() { }
