@@ -1,26 +1,35 @@
 package com.library.libraryDB.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
-@Document(collection = "employee")
-public class Employee {
-    /*
-    email - string [255] - id
-    name - string [255]
-    surname - string [255]
-    role - string [24] {librarian, admin}
-     */
+@Entity
+public class Employee implements Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String surname;
+
+    @Column(nullable = false)
     private String role;
+
+    @Column(nullable = false)
     private String password;
 
-    public Employee(String id, String email, String name, String surname, String role, String password) {
+    @OneToMany(mappedBy = "employee")
+    private Set<Loan> loanList;
+
+    public Employee(Long id, String email, String name, String surname, String role, String password) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -32,11 +41,11 @@ public class Employee {
     public Employee() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

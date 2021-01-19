@@ -23,8 +23,11 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "userWishList")
     private Set<Book> wishList;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Loan> loanList;
 
     public User() { }
 

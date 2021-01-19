@@ -2,6 +2,7 @@ package com.library.libraryDB.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class Item implements Serializable {
@@ -21,6 +22,9 @@ public class Item implements Serializable {
 
     @ManyToOne
     private Book book;
+
+    @OneToMany(mappedBy = "item")
+    private Set<Loan> loanList;
 
     public Item() {
     }

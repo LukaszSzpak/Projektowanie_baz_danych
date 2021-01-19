@@ -1,85 +1,86 @@
 package com.library.libraryDB.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-@Document(collection = "loan")
-public class Loan {
-    /*
-    id - string
-    user_id - id from User table
-    employee_id - id from Employee table
-    book_id - od from Book table
-    item_id - id from Item table
-    rent_date - date
-    date_planning_return - date
-    return_date - date
-    days_after_return_date - int (default 0)
-    additional_cost - float (default 0)
-     */
+@Entity
+public class Loan implements Serializable {
 
     @Id
-    private String id;
-    private String userId;
-    private String employeeId;
-    private String bookId;
-    private String itemId;
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false)
     private Date rentDate;
+
+    @Column
     private Date datePlanningReturn;
+
+    @Column
     private int daysAfterReturnDate;
+
+    @Column
     private float additionalCost;
-    private boolean isBack = false;
+
+    @Column
+    private boolean isBack;
+
+    @ManyToOne
+    private Employee employee;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Item item;
 
     public Loan() {
+        this.daysAfterReturnDate = 0;
+        this.additionalCost = (float) 0;
+        this.isBack = false;
     }
 
-    public Loan(String id, String userId, String employeeId, String bookId, String itemId, Date rentDate,
-                Date datePlanningReturn) {
+    public Loan(Long id, Date rentDate, Date datePlanningReturn) {
         this.id = id;
-        this.userId = userId;
-        this.employeeId = employeeId;
-        this.bookId = bookId;
-        this.itemId = itemId;
         this.rentDate = rentDate;
         this.datePlanningReturn = datePlanningReturn;
         this.daysAfterReturnDate = 0;
         this.additionalCost = (float) 0;
+        this.isBack = false;
     }
 
-    public Loan(String id, String userId, String employeeId, String bookId, String itemId, Date rentDate,
-                Date datePlanningReturn, int daysAfterReturnDate, float additionalCost, boolean isBack) {
+    public Loan(Long id, Date rentDate, Date datePlanningReturn, int daysAfterReturnDate, float additionalCost) {
         this.id = id;
-        this.userId = userId;
-        this.employeeId = employeeId;
-        this.bookId = bookId;
-        this.itemId = itemId;
         this.rentDate = rentDate;
         this.datePlanningReturn = datePlanningReturn;
         this.daysAfterReturnDate = daysAfterReturnDate;
         this.additionalCost = additionalCost;
-        this.isBack = isBack;
+        this.isBack = false;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public String getUserId() {
-        return userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public void setRentDate(Date rentDate) {
+        this.rentDate = rentDate;
     }
 
-    public String getBookId() {
-        return bookId;
+    public void setDatePlanningReturn(Date datePlanningReturn) {
+        this.datePlanningReturn = datePlanningReturn;
     }
 
-    public String getItemId() {
-        return itemId;
+    public void setDaysAfterReturnDate(int daysAfterReturnDate) {
+        this.daysAfterReturnDate = daysAfterReturnDate;
+    }
+
+    public void setAdditionalCost(float additionalCost) {
+        this.additionalCost = additionalCost;
     }
 
     public Date getRentDate() {
@@ -98,23 +99,35 @@ public class Loan {
         return additionalCost;
     }
 
-    public void setDatePlanningReturn(Date datePlanningReturn) {
-        this.datePlanningReturn = datePlanningReturn;
-    }
-
-    public void setDaysAfterReturnDate(int daysAfterReturnDate) {
-        this.daysAfterReturnDate = daysAfterReturnDate;
-    }
-
-    public void setAdditionalCost(float additionalCost) {
-        this.additionalCost = additionalCost;
-    }
-
     public boolean isBack() {
         return isBack;
     }
 
     public void setBack(boolean back) {
         isBack = back;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }
