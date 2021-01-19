@@ -1,35 +1,43 @@
 package com.library.libraryDB.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
+import java.io.Serializable;
 
-@Document(collection = "item")
-public class Item {
-    /*
-    id - string
-    available - true / false
-    publish_house - string [255]
-    condition - string [24] {poor, good, very_good, ...]
-     */
+@Entity
+public class Item implements Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
+
+    @Column
     private boolean available = true;
+
+    @Column(nullable = false)
     private String publishHouse;
+
+    @Column(nullable = false)
     private String condition;
+
+    @ManyToOne
+    private Book book;
 
     public Item() {
     }
 
-    public Item(String id, boolean available, String publishHouse, String condition) {
+    public Item(Long id, boolean available, String publishHouse, String condition) {
         this.id = id;
         this.available = available;
         this.publishHouse = publishHouse;
         this.condition = condition;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public boolean isAvailable() {
@@ -54,5 +62,13 @@ public class Item {
 
     public void setCondition(String condition) {
         this.condition = condition;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }
