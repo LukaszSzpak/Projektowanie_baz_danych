@@ -23,6 +23,9 @@ public class Book implements Serializable{
     @Column
     private boolean available = true;
 
+    @OneToMany(mappedBy = "book")
+    private Set<Item> itemList;
+
     @ManyToMany(mappedBy = "wishList")
     private Set<User> userWishList;
 
