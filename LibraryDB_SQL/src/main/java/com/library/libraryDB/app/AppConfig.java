@@ -1,24 +1,13 @@
 package com.library.libraryDB.app;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-public class MongoConfig {
-
-    public MongoClient mongoClient() {
-        return MongoClients.create("mongodb://localhost:27017/library");
-    }
-
-    public @Bean MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoClient(), "library");
-    }
+public class AppConfig {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
