@@ -7,7 +7,10 @@ import com.library.libraryDB.entities.Loan;
 import com.library.libraryDB.repositories.BookRepository;
 import com.library.libraryDB.repositories.ItemRepository;
 import com.library.libraryDB.repositories.LoanRepository;
+import com.library.libraryDB.services.Interfaces.EmployeeService;
+import com.library.libraryDB.services.Interfaces.ItemService;
 import com.library.libraryDB.services.Interfaces.LoanService;
+import com.library.libraryDB.services.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,12 @@ public class LoanServiceImpl implements LoanService {
     @Autowired
     private ItemRepository itemRepository;
 
+    //????????????????????
+    private UserService userService;
+    private EmployeeService employeeService;
+    private ItemService itemService;
+
+
     @Override
     public Loan getLoan(Long id) {
         if (loanRepository.findById(id).isPresent())
@@ -41,7 +50,7 @@ public class LoanServiceImpl implements LoanService {
                 maxId = loan.getId();
         }
 
-        Loan tempLoan = createLoanDto.makeLoan(String.valueOf(maxId + 1));
+        Loan tempLoan = createLoanDto.makeLoan(maxId + 1, userService, employeeService, itemService);
         checkBookAndItemAvailable(tempLoan);
         loanRepository.save(tempLoan);
 

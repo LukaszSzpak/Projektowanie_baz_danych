@@ -21,7 +21,7 @@ public class BookController {
 
     @GetMapping(value = "/books/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Book> getBook(@PathVariable(value = "id") String id) {
+    public ResponseEntity<Book> getBook(@PathVariable(value = "id") Long id) {
         Book tempBook = bookService.getBook(id);
 
         if (tempBook != null)
@@ -50,7 +50,7 @@ public class BookController {
     @PutMapping(value = "/books/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Book> updateBook(@RequestBody Book book,
-                                           @PathVariable(value = "id") String id) {
+                                           @PathVariable(value = "id") Long id) {
         Book tempBook = bookService.updateBook(id, book);
 
         if (tempBook != null)
@@ -63,7 +63,7 @@ public class BookController {
      */
     @GetMapping(value = "/book/addItem")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Book> addItemToBook(@RequestParam Map<String, String> bookAndItem) {
+    public ResponseEntity<Book> addItemToBook(@RequestParam Map<Long, Long> bookAndItem) {
         Book tempBook = bookService.addItem(bookAndItem.get("bookId"), bookAndItem.get("itemId"));
 
         if (tempBook != null)
@@ -73,7 +73,7 @@ public class BookController {
 
     @DeleteMapping(value = "/book/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Boolean> deleteBook(@PathVariable(value = "id") String id) {
+    public ResponseEntity<Boolean> deleteBook(@PathVariable(value = "id") Long id) {
         if (bookService.deleteBookWithItems(id))
             return new ResponseEntity<>(true, HttpStatus.OK);
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
@@ -84,7 +84,7 @@ public class BookController {
      */
     @GetMapping(value = "/book/changeAv")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Boolean> changeAvaliable(@RequestParam Map<String, String> bookAndAvaliable) {
+    public ResponseEntity<Boolean> changeAvaliable(@RequestParam Map<Long, Long> bookAndAvaliable) {
         boolean bookAvaliable = bookAndAvaliable.get("avaliable").equals("true");
 
         if (bookService.changeAvaliable(bookAndAvaliable.get("bookId"), bookAvaliable))
