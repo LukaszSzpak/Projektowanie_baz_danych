@@ -28,7 +28,7 @@ public class ItemServiceImpl implements ItemService {
                 maxId = item.getId();
         }
 
-        Item item = createItemDto.createItemFromDto(String.valueOf(maxId + 1));
+        Item item = createItemDto.createItemFromDto(maxId + 1);
         itemRepository.save(item);
 
         return item;
