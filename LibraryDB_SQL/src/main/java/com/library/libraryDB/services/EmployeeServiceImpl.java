@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Set<Employee> getEmployesList() {
-        return new HashSet<Employee>(employeeRepository.findAll());
+    public List<Employee> getEmployesList() {
+        return employeeRepository.findAll();
     }
 }

@@ -2,6 +2,9 @@ package com.library.libraryDB.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,7 +27,7 @@ public class Book implements Serializable{
     private boolean available = true;
 
     @OneToMany(mappedBy = "book")
-    private Set<Long> itemList;
+    private Set<Item> itemList;
 
     @ManyToMany(mappedBy = "wishList")
     private Set<User> userWishList;
@@ -75,15 +78,17 @@ public class Book implements Serializable{
         this.available = available;
     }
 
-    public Set<Long> getItemList() {
-        return this.itemList;
+    public List<Item> getItemList() {
+        List<Item> list = new ArrayList<>(itemList);
+        return list;
     }
 
-    public void setItemList(Set<Long> itemList) {
-        this.itemList = itemList;
+    public void setItemList(List<Item> itemList) {
+        Set<Item> set = new HashSet<Item>(itemList);
+        this.itemList = set;
     }
 
-    public void addItemToList(Long itemId) {
-        itemList.add(itemId);
+    public void addItemToList(Item item) {
+        itemList.add(item);
     }
 }

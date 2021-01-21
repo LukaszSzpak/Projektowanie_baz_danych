@@ -10,5 +10,5 @@ public interface EmployeeService {
     Employee changeData(Employee employee, Long id);
     Employee createEmployee(Employee employee);
     Boolean deleteEmployee(Long id);
-    Set<Employee> getEmployesList();
+    List<Employee> getEmployesList();
 }

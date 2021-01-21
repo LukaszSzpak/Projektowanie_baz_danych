@@ -10,6 +10,6 @@ public interface LoanService {
     Loan getLoan(Long id);
     Loan createLoan(CreateLoanDto createLoanDto);
     Loan updateLoan(Long id, Loan loan);
-    Set<Loan> getUserLoanList(Long userId);
-    Set<Loan> getAllLoans();
+    List<Loan> getUserLoanList(Long userId);
+    List<Loan> getAllLoans();
 }

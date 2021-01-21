@@ -2,16 +2,14 @@ package com.library.libraryDB.services;
 
 import com.library.libraryDB.dto.CreateBookDto;
 import com.library.libraryDB.entities.Book;
+import com.library.libraryDB.entities.Item;
 import com.library.libraryDB.repositories.BookRepository;
 import com.library.libraryDB.repositories.ItemRepository;
 import com.library.libraryDB.services.Interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.util.resources.cldr.ext.LocaleNames_en_GB;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -25,7 +23,7 @@ public class BookServiceImpl implements BookService {
     public Book addItem(Long id, Long itemId) {
         if (bookRepository.findById(id).isPresent()) {
             Book tempBook = bookRepository.findById(id).get();
-            tempBook.addItemToList(itemId);
+            tempBook.addItemToList(itemRepository.getOne(itemId));
             tempBook.setAvailable(true);
             bookRepository.save(tempBook);
 
@@ -35,7 +33,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Set<Long> getItemList(Long id) {
+    public List<Item> getItemList(Long id) {
         if (bookRepository.findById(id).isPresent())
             return bookRepository.findById(id).get().getItemList();
         return null;
@@ -50,8 +48,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Set<Book> getBooks() {
-        return new HashSet<Book>(bookRepository.findAll());
+    public List<Book> getBooks() {
+        return bookRepository.findAll();
     }
 
     @Override
@@ -62,7 +60,7 @@ public class BookServiceImpl implements BookService {
                 maxId = book.getId();
         }
 
-        Book tempBook = createBookDto.makeBook(String.valueOf(maxId + 1));
+        Book tempBook = createBookDto.makeBook(maxId + 1);
         bookRepository.save(tempBook);
         return tempBook;
     }
@@ -87,7 +85,8 @@ public class BookServiceImpl implements BookService {
     public boolean deleteBookWithItems(Long id) {
         if (bookRepository.findById(id).isPresent()) {
             Book tempBook = bookRepository.findById(id).get();
-            for (Long itemId: tempBook.getItemList()) {
+            for (Item item: tempBook.getItemList()) {
+                long itemId = item.getId();
                 if (itemRepository.findById(itemId).isPresent())
                     itemRepository.deleteById(itemId);
             }
@@ -111,7 +110,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Set<Book> searchBook(String searchingPhrase) {
+    public List<Book> searchBook(String searchingPhrase) {
         //TODO make a searcher XD
         return null;
     }

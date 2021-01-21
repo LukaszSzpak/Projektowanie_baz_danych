@@ -73,7 +73,17 @@ public class CreateLoanDto {
         this.datePlanningReturn = datePlanningReturn;
     }
 
-    public Loan makeLoan(String id) {
+/*
+    public Loan(Long id, Date rentDate, Date datePlanningReturn, int daysAfterReturnDate, float additionalCost) {
+        this.id = id;
+        this.rentDate = rentDate;
+        this.datePlanningReturn = datePlanningReturn;
+        this.daysAfterReturnDate = daysAfterReturnDate;
+        this.additionalCost = additionalCost;
+        this.isBack = false;
+    }
+ */
+    public Loan makeLoan(Long id) {
         return new Loan(id, this.userId, this.employeeId, this.bookId, this.itemId, this.rentDate,
                 this.datePlanningReturn);
     }

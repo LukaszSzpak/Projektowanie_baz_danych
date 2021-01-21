@@ -10,6 +10,6 @@ public interface UserService {
     User createUser(User user);
     User updateUser(User user, Long id);
     boolean deleteUser(Long email);
-    Set<User> getAllUsers();
+    List<User> getAllUsers();
     User addBookToWishList(User user, Long bookId);
 }

@@ -62,8 +62,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<User> getAllUsers() {
-        return new HashSet<>(userRepository.findAll());
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override

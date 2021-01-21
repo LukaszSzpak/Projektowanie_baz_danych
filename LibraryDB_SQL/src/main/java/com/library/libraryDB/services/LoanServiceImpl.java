@@ -67,10 +67,10 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public Set<Loan> getUserLoanList(Long userId) {
-        return new HashSet<Loan>(loanRepository.findAll().stream()
+    public List<Loan> getUserLoanList(Long userId) {
+        return loanRepository.findAll().stream()
                 .filter(loan -> loan.getUserId().equals(userId))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     private void checkBookAndItemAvailable(Loan loan) {
@@ -92,7 +92,8 @@ public class LoanServiceImpl implements LoanService {
             Book tempBook = bookRepository.findById(bookId).get();
             tempBook.setAvailable(false);
 
-            for (Long tempItemId : tempBook.getItemList()) {
+            for (Item tempItem : tempBook.getItemList()) {
+                long tempItemId = tempItem.getId();
                 if (itemRepository.findById(tempItemId).isPresent()) {
                     if (itemRepository.findById(tempItemId).get().isAvailable()) {
                         tempBook.setAvailable(true);
@@ -107,7 +108,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public Set<Loan> getAllLoans() {
-        return new HashSet<>(loanRepository.findAll());
+    public List<Loan> getAllLoans() {
+        return loanRepository.findAll();
     }
 }
