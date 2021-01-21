@@ -130,4 +130,16 @@ public class Loan implements Serializable {
     public void setItem(Item item) {
         this.item = item;
     }
+
+    public Long getUserId() {
+        return user.getId();
+    }
+
+    public Long getItemId() {
+        return item.getId();
+    }
+
+    public Long getBookId() {
+        return item.getBook().getId();
+    }
 }

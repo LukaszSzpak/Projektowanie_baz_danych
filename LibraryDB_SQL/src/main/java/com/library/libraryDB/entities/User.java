@@ -82,4 +82,8 @@ public class User implements Serializable {
     public void setWishList(Set<Book> wishList) {
         this.wishList = wishList;
     }
+
+    public void addToWishList(Book book) {
+        this.wishList.add(book);
+    }
 }

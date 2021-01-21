@@ -6,7 +6,9 @@ import com.library.libraryDB.services.Interfaces.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -14,14 +16,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public Employee getEmployeeById(String id) {
+    public Employee getEmployeeById(Long id) {
         if (employeeRepository.findById(id).isPresent())
             return employeeRepository.findById(id).get();
         return null;
     }
 
     @Override
-    public Employee changeData(Employee employee, String id) {
+    public Employee changeData(Employee employee, Long id) {
         if (employeeRepository.findById(id).isPresent()) {
             Employee tempEmployee = employeeRepository.findById(id).get();
             tempEmployee.setName(employee.getName());
@@ -36,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
-        String employeeId = employee.getId();
+        Long employeeId = employee.getId();
 
         if (employeeRepository.findById(employeeId).isPresent()) {
             return null;
@@ -46,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Boolean deleteEmployee(String id) {
+    public Boolean deleteEmployee(Long id) {
         if (employeeRepository.findById(id).isPresent()) {
             employeeRepository.deleteById(id);
             return true;
@@ -55,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployesList() {
-        return employeeRepository.findAll();
+    public Set<Employee> getEmployesList() {
+        return new HashSet<Employee>(employeeRepository.findAll());
     }
 }

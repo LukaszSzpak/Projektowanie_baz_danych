@@ -4,7 +4,7 @@ import com.library.libraryDB.dto.CreateItemDto;
 import com.library.libraryDB.entities.Item;
 
 public interface ItemService {
-    Item getItem(String id);
+    Item getItem(Long id);
     Item createItem(CreateItemDto createItemDto);
-    Item updateItem(String id, Item item);
+    Item updateItem(Long id, Item item);
 }

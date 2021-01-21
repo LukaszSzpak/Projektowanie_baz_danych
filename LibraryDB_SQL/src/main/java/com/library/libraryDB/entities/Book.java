@@ -24,7 +24,7 @@ public class Book implements Serializable{
     private boolean available = true;
 
     @OneToMany(mappedBy = "book")
-    private Set<Item> itemList;
+    private Set<Long> itemList;
 
     @ManyToMany(mappedBy = "wishList")
     private Set<User> userWishList;
@@ -73,5 +73,17 @@ public class Book implements Serializable{
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public Set<Long> getItemList() {
+        return this.itemList;
+    }
+
+    public void setItemList(Set<Long> itemList) {
+        this.itemList = itemList;
+    }
+
+    public void addItemToList(Long itemId) {
+        itemList.add(itemId);
     }
 }
