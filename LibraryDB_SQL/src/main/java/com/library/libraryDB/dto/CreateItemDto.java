@@ -30,7 +30,7 @@ public class CreateItemDto {
         this.condition = condition;
     }
 
-    public Item createItemFromDto(Long id) {
+    public Item createItemFromDto(String id) {
         return new Item(id, true, this.publishHouse, this.condition);
     }
 }

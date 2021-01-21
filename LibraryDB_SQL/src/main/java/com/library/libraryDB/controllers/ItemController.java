@@ -17,7 +17,7 @@ public class ItemController {
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Item> getItem(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Item> getItem(@PathVariable(value = "id") String id) {
         Item tempItem = itemService.getItem(id);
 
         if (tempItem != null)
@@ -44,7 +44,7 @@ public class ItemController {
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Item> updateItem(@PathVariable(value = "id") Long id,
+    public ResponseEntity<Item> updateItem(@PathVariable(value = "id") String id,
                                            @RequestBody Item item) {
         Item tempItem = itemService.updateItem(id, item);
 

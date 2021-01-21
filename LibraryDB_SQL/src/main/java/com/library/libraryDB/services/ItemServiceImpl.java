@@ -14,7 +14,7 @@ public class ItemServiceImpl implements ItemService {
     private ItemRepository itemRepository;
 
     @Override
-    public Item getItem(Long id) {
+    public Item getItem(String id) {
         if (itemRepository.findById(id).isPresent())
             return itemRepository.findById(id).get();
         return null;
@@ -22,20 +22,20 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item createItem(CreateItemDto createItemDto) {
-        long maxId = -1;
+        int maxId = -1;
         for(Item item : itemRepository.findAll()) {
-            if (item.getId() > maxId)
-                maxId = item.getId();
+            if (Integer.parseInt(item.getId()) > maxId)
+                maxId = Integer.parseInt(item.getId());
         }
 
-        Item item = createItemDto.createItemFromDto(maxId + 1);
+        Item item = createItemDto.createItemFromDto(String.valueOf(maxId + 1));
         itemRepository.save(item);
 
         return item;
     }
 
     @Override
-    public Item updateItem(Long id, Item item) {
+    public Item updateItem(String id, Item item) {
         if (itemRepository.findById(id).isPresent()) {
             Item tempItem = itemRepository.findById(id).get();
             tempItem.setCondition(item.getCondition());

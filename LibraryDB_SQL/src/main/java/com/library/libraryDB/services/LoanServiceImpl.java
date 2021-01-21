@@ -7,17 +7,12 @@ import com.library.libraryDB.entities.Loan;
 import com.library.libraryDB.repositories.BookRepository;
 import com.library.libraryDB.repositories.ItemRepository;
 import com.library.libraryDB.repositories.LoanRepository;
-import com.library.libraryDB.services.Interfaces.EmployeeService;
-import com.library.libraryDB.services.Interfaces.ItemService;
 import com.library.libraryDB.services.Interfaces.LoanService;
-import com.library.libraryDB.services.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,14 +24,8 @@ public class LoanServiceImpl implements LoanService {
     @Autowired
     private ItemRepository itemRepository;
 
-    //????????????????????
-    private UserService userService;
-    private EmployeeService employeeService;
-    private ItemService itemService;
-
-
     @Override
-    public Loan getLoan(Long id) {
+    public Loan getLoan(String id) {
         if (loanRepository.findById(id).isPresent())
             return loanRepository.findById(id).get();
         return null;
@@ -44,13 +33,13 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public Loan createLoan(CreateLoanDto createLoanDto) {
-        long maxId = -1;
+        int maxId = -1;
         for(Loan loan : loanRepository.findAll()) {
-            if (loan.getId() > maxId)
-                maxId = loan.getId();
+            if (Integer.parseInt(loan.getId()) > maxId)
+                maxId = Integer.parseInt(loan.getId());
         }
 
-        Loan tempLoan = createLoanDto.makeLoan(maxId + 1, userService, employeeService, itemService);
+        Loan tempLoan = createLoanDto.makeLoan(String.valueOf(maxId + 1));
         checkBookAndItemAvailable(tempLoan);
         loanRepository.save(tempLoan);
 
@@ -58,7 +47,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public Loan updateLoan(Long id, Loan loan) {
+    public Loan updateLoan(String id, Loan loan) {
         if (loanRepository.findById(id).isPresent()) {
             Loan tempLoan = loanRepository.findById(id).get();
             tempLoan.setAdditionalCost(loan.getAdditionalCost());
@@ -76,15 +65,15 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public List<Loan> getUserLoanList(Long userId) {
+    public List<Loan> getUserLoanList(String userId) {
         return loanRepository.findAll().stream()
                 .filter(loan -> loan.getUserId().equals(userId))
                 .collect(Collectors.toList());
     }
 
     private void checkBookAndItemAvailable(Loan loan) {
-        Long itemId = loan.getItemId();
-        Long bookId = loan.getBookId();
+        String itemId = loan.getItemId();
+        String bookId = loan.getBookId();
 
         for (Loan tempLoan : loanRepository.findAll()) {
             if (tempLoan.getItemId().equals(itemId) && !tempLoan.isBack()) {
@@ -101,8 +90,7 @@ public class LoanServiceImpl implements LoanService {
             Book tempBook = bookRepository.findById(bookId).get();
             tempBook.setAvailable(false);
 
-            for (Item tempItem : tempBook.getItemList()) {
-                long tempItemId = tempItem.getId();
+            for (String tempItemId : tempBook.getItemList()) {
                 if (itemRepository.findById(tempItemId).isPresent()) {
                     if (itemRepository.findById(tempItemId).get().isAvailable()) {
                         tempBook.setAvailable(true);

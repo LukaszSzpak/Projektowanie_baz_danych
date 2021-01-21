@@ -64,20 +64,9 @@ public class CreateUserDto {
         this.wishList = wishList;
     }
 
-    /*
-    public User(Long id, String name, String surname, String email, String password){
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-    }
-     */
     public User parseToUser(UserService userService) {
-        List<User> userList = userService.getAllUsers();
-        long lastId = userList.get(userList.size() - 1).getId();
-        long newId = lastId + 1;
+        int len = Integer.parseInt(userService.getAllUsers().get(userService.getAllUsers().size() - 1).getId());
 
-        return new User(newId, this.name, this.surname, this.email, this.password);
+        return new User(String.valueOf(len + 1), this.name, this.surname, this.email, this.password, this.wishList);
     }
 }

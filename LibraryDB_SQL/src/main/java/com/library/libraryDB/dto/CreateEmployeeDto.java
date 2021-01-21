@@ -3,8 +3,6 @@ package com.library.libraryDB.dto;
 import com.library.libraryDB.entities.Employee;
 import com.library.libraryDB.services.Interfaces.EmployeeService;
 
-import java.util.List;
-
 public class CreateEmployeeDto {
     private String email;
     private String name;
@@ -64,11 +62,9 @@ public class CreateEmployeeDto {
     }
 
     public Employee parseToEmployee(EmployeeService employeeService) {
-        List<Employee> empList = employeeService.getEmployesList();
-        long lastId = empList.get(empList.size() - 1).getId();
-        long newId = lastId + 1;
+        int len = Integer.parseInt(employeeService.getEmployesList().get(employeeService.getEmployesList().size() - 1).getId());
 
-        return new Employee(newId, this.getEmail(), this.getName(), this.getSurname(),
+        return new Employee(String.valueOf(len + 1), this.getEmail(), this.getName(), this.getSurname(),
                 this.getRole(), this.getPassword());
     }
 }

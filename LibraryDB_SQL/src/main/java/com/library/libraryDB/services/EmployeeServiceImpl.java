@@ -6,9 +6,7 @@ import com.library.libraryDB.services.Interfaces.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -16,14 +14,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public Employee getEmployeeById(Long id) {
+    public Employee getEmployeeById(String id) {
         if (employeeRepository.findById(id).isPresent())
             return employeeRepository.findById(id).get();
         return null;
     }
 
     @Override
-    public Employee changeData(Employee employee, Long id) {
+    public Employee changeData(Employee employee, String id) {
         if (employeeRepository.findById(id).isPresent()) {
             Employee tempEmployee = employeeRepository.findById(id).get();
             tempEmployee.setName(employee.getName());
@@ -38,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
-        Long employeeId = employee.getId();
+        String employeeId = employee.getId();
 
         if (employeeRepository.findById(employeeId).isPresent()) {
             return null;
@@ -48,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Boolean deleteEmployee(Long id) {
+    public Boolean deleteEmployee(String id) {
         if (employeeRepository.findById(id).isPresent()) {
             employeeRepository.deleteById(id);
             return true;

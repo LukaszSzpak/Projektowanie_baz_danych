@@ -27,7 +27,7 @@ public class UserController {
 
     @GetMapping(value = "/users/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> getUser(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<User> getUser(@PathVariable(value = "id") String id) {
         User user = userService.getUserById(id);
 
         if (user != null)
@@ -60,7 +60,7 @@ public class UserController {
     @PutMapping(value = "/user/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> updateUser(@RequestBody User user,
-                                           @PathVariable(value = "id") Long id) {
+                                           @PathVariable(value = "id") String id) {
         User resultUser = userService.updateUser(user, id);
 
         if (resultUser != null)
@@ -70,7 +70,7 @@ public class UserController {
 
     @DeleteMapping(value = "/user/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Boolean> deleteUser(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Boolean> deleteUser(@PathVariable(value = "id") String id) {
         if (userService.deleteUser(id))
             return new ResponseEntity<>(true, HttpStatus.OK);
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
@@ -78,7 +78,7 @@ public class UserController {
 
     @PutMapping(value = "/user/addBook")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> addBookToWishList(@RequestHeader("Book-id") Long bookId,
+    public ResponseEntity<User> addBookToWishList(@RequestHeader("Book-id") String bookId,
                                                   @RequestBody User user) {
         User resultUser = userService.addBookToWishList(user, bookId);
 
@@ -89,7 +89,7 @@ public class UserController {
 
     @GetMapping(value = "/wishlist{*}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Book>> getWishList(@RequestHeader("User-id") Long id) {
+    public ResponseEntity<List<Book>> getWishList(@RequestHeader("User-id") String id) {
         User resultUser = userService.getUserById(id);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=UTF-8");
@@ -97,8 +97,8 @@ public class UserController {
         if (resultUser != null) {
             LinkedList<Book> itemLinkedList = new LinkedList<>();
 
-            for (Book book : resultUser.getWishList())
-                itemLinkedList.add(book);
+            for (String bookId : resultUser.getWishList())
+                itemLinkedList.add(bookService.getBook(bookId));
 
             headers.add("Content-Range", ("item 0-" + itemLinkedList.size() + "/" + itemLinkedList.size()));
 

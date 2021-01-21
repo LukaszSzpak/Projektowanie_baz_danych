@@ -1,6 +1,5 @@
 package com.library.libraryDB.services;
 
-import com.library.libraryDB.entities.Book;
 import com.library.libraryDB.entities.User;
 import com.library.libraryDB.repositories.BookRepository;
 import com.library.libraryDB.repositories.UserRepository;
@@ -8,10 +7,7 @@ import com.library.libraryDB.services.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private BookRepository bookRepository;
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(String id) {
         if(userRepository.findById(id).isPresent())
             return userRepository.findById(id).get();
         else
@@ -40,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user, Long id) {
+    public User updateUser(User user, String id) {
         if(userRepository.findById(id).isPresent()) {
             User resultUser = userRepository.findById(id).get();
             resultUser.setName(user.getName());
@@ -53,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(Long id) {
+    public boolean deleteUser(String id) {
         if (userRepository.findById(id).isPresent()) {
             userRepository.deleteById(id);
             return true;
@@ -67,11 +63,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addBookToWishList(User user, Long bookId) {
-        //Optional<Book> book = bookRepository.findById(bookId); ??
+    public User addBookToWishList(User user, String bookId) {
         if (bookRepository.findById(bookId).isPresent() && userRepository.findById(user.getId()).isPresent()) {
             User resultUser = userRepository.findById(user.getId()).get();
-            resultUser.addToWishList(bookRepository.getOne(bookId));
+            resultUser.addToWishList(bookId);
             return resultUser;
         }
         return null;

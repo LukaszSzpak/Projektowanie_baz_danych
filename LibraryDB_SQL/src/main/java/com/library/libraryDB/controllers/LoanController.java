@@ -19,7 +19,7 @@ public class LoanController {
 
     @GetMapping(value = "/loans/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Loan> getLoan(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Loan> getLoan(@PathVariable(value = "id") String id) {
         Loan tempLoan = loanService.getLoan(id);
 
         if (tempLoan != null)
@@ -35,7 +35,7 @@ public class LoanController {
 
     @PutMapping(value = "/loans/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Loan> updateLoan(@PathVariable(value = "id") Long id,
+    public ResponseEntity<Loan> updateLoan(@PathVariable(value = "id") String id,
                                            @RequestBody Loan loan) {
         Loan tempLoan = loanService.updateLoan(id, loan);
 
@@ -46,14 +46,14 @@ public class LoanController {
 
     @GetMapping(value = "/loans/getList?userId={userId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Loan>> getUserLoanList(@PathVariable(value = "userId") Long userId) {
+    public ResponseEntity<List<Loan>> getUserLoanList(@PathVariable(value = "userId") String userId) {
         return new ResponseEntity<>(loanService.getUserLoanList(userId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/loans")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Loan>> getAllLoans(@RequestHeader("User-role") String role,
-                                                  @RequestHeader("User-id") Long id) {
+                                                  @RequestHeader("User-id") String id) {
         List<Loan> loanList = null;
 
         if (role.equals("user"))

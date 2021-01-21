@@ -3,12 +3,11 @@ package com.library.libraryDB.services.Interfaces;
 import com.library.libraryDB.entities.Employee;
 
 import java.util.List;
-import java.util.Set;
 
 public interface EmployeeService {
-    Employee getEmployeeById(Long id);
-    Employee changeData(Employee employee, Long id);
+    Employee getEmployeeById(String email);
+    Employee changeData(Employee employee, String email);
     Employee createEmployee(Employee employee);
-    Boolean deleteEmployee(Long id);
+    Boolean deleteEmployee(String email);
     List<Employee> getEmployesList();
 }

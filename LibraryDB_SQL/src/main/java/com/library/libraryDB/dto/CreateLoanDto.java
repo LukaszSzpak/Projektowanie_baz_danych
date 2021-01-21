@@ -1,24 +1,18 @@
 package com.library.libraryDB.dto;
 
-import com.library.libraryDB.entities.Employee;
-import com.library.libraryDB.entities.Item;
 import com.library.libraryDB.entities.Loan;
-import com.library.libraryDB.entities.User;
-import com.library.libraryDB.services.Interfaces.ItemService;
-import com.library.libraryDB.services.Interfaces.UserService;
-import com.library.libraryDB.services.Interfaces.EmployeeService;
 
 import java.util.Date;
 
 public class CreateLoanDto {
-    private Long userId;
-    private Long employeeId;
-    private Long bookId;
-    private Long itemId;
+    private String userId;
+    private String employeeId;
+    private String bookId;
+    private String itemId;
     private Date rentDate;
     private Date datePlanningReturn;
 
-    public CreateLoanDto(Long userId, Long employeeId, Long bookId, Long itemId, Date rentDate,
+    public CreateLoanDto(String userId, String employeeId, String bookId, String itemId, Date rentDate,
                          Date datePlanningReturn) {
         this.userId = userId;
         this.employeeId = employeeId;
@@ -31,35 +25,35 @@ public class CreateLoanDto {
     public CreateLoanDto() {
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Long getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Long employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 
-    public Long getBookId() {
+    public String getBookId() {
         return bookId;
     }
 
-    public void setBookId(Long bookId) {
+    public void setBookId(String bookId) {
         this.bookId = bookId;
     }
 
-    public Long getItemId() {
+    public String getItemId() {
         return itemId;
     }
 
-    public void setItemId(Long itemId) {
+    public void setItemId(String itemId) {
         this.itemId = itemId;
     }
 
@@ -79,18 +73,8 @@ public class CreateLoanDto {
         this.datePlanningReturn = datePlanningReturn;
     }
 
-    /*
     public Loan makeLoan(String id) {
         return new Loan(id, this.userId, this.employeeId, this.bookId, this.itemId, this.rentDate,
                 this.datePlanningReturn);
-    }
-     */
-
-    public Loan makeLoan(Long id, UserService userService, EmployeeService employeeService, ItemService itemService) {
-        User user = userService.getUserById(this.userId);
-        Employee emp = employeeService.getEmployeeById(this.employeeId);
-        Item item = itemService.getItem(this.itemId);
-
-        return new Loan(id, this.rentDate, this.datePlanningReturn, emp, user, item);
     }
 }
