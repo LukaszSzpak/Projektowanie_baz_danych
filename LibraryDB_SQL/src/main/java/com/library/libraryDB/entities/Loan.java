@@ -59,6 +59,16 @@ public class Loan implements Serializable {
         this.isBack = false;
     }
 
+    /*?????????????*/
+    public Loan(Long id, Date rentDate, Date datePlanningReturn, Employee employee, User user, Item item) {
+        this.id = id;
+        this.rentDate = rentDate;
+        this.datePlanningReturn = datePlanningReturn;
+        this.employee = employee;
+        this.user = user;
+        this.item = item;
+    }
+
     public Long getId() {
         return id;
     }
@@ -129,5 +139,17 @@ public class Loan implements Serializable {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public Long getUserId() {
+        return user.getId();
+    }
+
+    public Long getItemId() {
+        return item.getId();
+    }
+
+    public Long getBookId() {
+        return item.getBook().getId();
     }
 }

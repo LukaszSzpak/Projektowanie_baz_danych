@@ -5,15 +5,16 @@ import com.library.libraryDB.entities.Book;
 import com.library.libraryDB.entities.Item;
 
 import java.util.List;
+import java.util.Set;
 
 public interface BookService {
-    Book addItem(String id, String itemId);
-    List<String> getItemList(String id);
-    Book getBook(String id);
+    Book addItem(Long id, Long itemId);
+    List<Item> getItemList(Long id);
+    Book getBook(Long id);
     List<Book> getBooks();
     Book createBook(CreateBookDto createBookDto);
-    Book updateBook(String id, Book book);
-    boolean deleteBookWithItems(String id);
-    boolean changeAvaliable(String id, boolean avaliable);
+    Book updateBook(Long id, Book book);
+    boolean deleteBookWithItems(Long id);
+    boolean changeAvaliable(Long id, boolean avaliable);
     List<Book> searchBook(String searchingPhrase);
 }

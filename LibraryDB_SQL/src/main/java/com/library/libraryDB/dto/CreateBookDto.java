@@ -40,7 +40,7 @@ public class CreateBookDto {
         this.description = description;
     }
 
-    public Book makeBook(String id) {
+    public Book makeBook(Long id) {
         return new Book(id, this.title, this.author, this.description);
     }
 }

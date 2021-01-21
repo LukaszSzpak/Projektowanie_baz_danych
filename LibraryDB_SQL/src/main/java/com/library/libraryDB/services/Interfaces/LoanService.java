@@ -4,11 +4,12 @@ import com.library.libraryDB.dto.CreateLoanDto;
 import com.library.libraryDB.entities.Loan;
 
 import java.util.List;
+import java.util.Set;
 
 public interface LoanService {
-    Loan getLoan(String id);
+    Loan getLoan(Long id);
     Loan createLoan(CreateLoanDto createLoanDto);
-    Loan updateLoan(String id, Loan loan);
-    List<Loan> getUserLoanList(String userId);
+    Loan updateLoan(Long id, Loan loan);
+    List<Loan> getUserLoanList(Long userId);
     List<Loan> getAllLoans();
 }

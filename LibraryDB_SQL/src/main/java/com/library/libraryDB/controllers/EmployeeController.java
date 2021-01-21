@@ -20,7 +20,7 @@ public class EmployeeController {
 
     @GetMapping(value = "/employees/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Employee> getEmployee(@PathVariable(value = "id") String id) {
+    public ResponseEntity<Employee> getEmployee(@PathVariable(value = "id") Long id) {
         Employee tempEmployee = employeeService.getEmployeeById(id);
 
         if (tempEmployee != null)
@@ -30,7 +30,7 @@ public class EmployeeController {
 
     @PutMapping(value = "/employees/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Employee> changeEmployeeData(@PathVariable(value = "id") String id,
+    public ResponseEntity<Employee> changeEmployeeData(@PathVariable(value = "id") Long id,
                                                        @RequestBody Employee employee) {
         Employee tempEmployee = employeeService.changeData(employee, id);
 
@@ -51,7 +51,7 @@ public class EmployeeController {
 
     @DeleteMapping(value = "/employees/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Boolean> deleteEmployee(@PathVariable(value = "id") String id) {
+    public ResponseEntity<Boolean> deleteEmployee(@PathVariable(value = "id") Long id) {
         if (employeeService.deleteEmployee(id))
             return new ResponseEntity<>(true, HttpStatus.OK);
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);

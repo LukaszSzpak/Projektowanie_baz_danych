@@ -2,6 +2,9 @@ package com.library.libraryDB.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -73,5 +76,19 @@ public class Book implements Serializable{
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public List<Item> getItemList() {
+        List<Item> list = new ArrayList<>(itemList);
+        return list;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        Set<Item> set = new HashSet<Item>(itemList);
+        this.itemList = set;
+    }
+
+    public void addItemToList(Item item) {
+        itemList.add(item);
     }
 }
