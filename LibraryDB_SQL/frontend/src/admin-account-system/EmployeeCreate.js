@@ -11,8 +11,8 @@ export default function UserCreate(props) {
                 <TextInput source='email'/>
                 <TextInput source='password'/>
                 <SelectInput source="role" choices={[
-                    { id: 'admin', name: 'admin' },
-                    { id: 'librarian', name: 'librarian' }, 
+                    { id: 'admin', name: 'ADMIN' },
+                    { id: 'librarian', name: 'LIBRARIAN' }, 
                 ]} />
             </SimpleForm>
         </Create>
