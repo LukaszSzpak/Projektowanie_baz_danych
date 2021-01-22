@@ -65,10 +65,12 @@ public class CreateEmployeeDto {
 
     public Employee parseToEmployee(EmployeeService employeeService) {
         List<Employee> empList = employeeService.getEmployesList();
-        long lastId = empList.get(empList.size() - 1).getId();
-        long newId = lastId + 1;
+        long lastId = 0;
+        if (empList.size() > 0) {
+            lastId = empList.get(empList.size() - 1).getId();
+        }
 
-        return new Employee(newId, this.getEmail(), this.getName(), this.getSurname(),
+        return new Employee(lastId + 1, this.getEmail(), this.getName(), this.getSurname(),
                 this.getRole(), this.getPassword());
     }
 }
