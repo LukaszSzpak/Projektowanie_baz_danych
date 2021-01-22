@@ -100,7 +100,12 @@ function App() {
 
       <Route exact path='/'>
         <div>
-          <LoginView />
+          <Admin dataProvider={dataProvider}>
+            <Resource name="books" list = {AdminBookList} create={BookCreate} edit={BookEdit} />
+            <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
+            <Resource name="employees" list = {EmployeeList} create={EmployeeCreate} edit={EmployeeEdit} />
+            <Resource name="loans" list = {AdminTransactionList} create={TransactionCreate} edit={TransactionEdit} />
+          </Admin>
         </div>
       </Route>
       

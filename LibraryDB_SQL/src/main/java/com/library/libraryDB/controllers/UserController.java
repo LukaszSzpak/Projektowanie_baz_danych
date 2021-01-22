@@ -50,10 +50,16 @@ public class UserController {
     @PostMapping(value = "/user")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> createUser(@RequestBody CreateUserDto createUserDto) {
+        System.out.println("In method crateUser");
         User resultUser = userService.createUser(createUserDto.parseToUser(userService));
+        /*czyli createUser albo parse to user*/
 
-        if (resultUser != null)
+        System.out.println("Result user created");
+        if (resultUser != null) {
+            System.out.println("Result user != null");
             return new ResponseEntity<>(resultUser, HttpStatus.OK);
+        }
+        System.out.println("Result user == null");
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
