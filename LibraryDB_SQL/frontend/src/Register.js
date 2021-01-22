@@ -24,7 +24,7 @@ export default function Register() {
             password: password,
         }
 
-        fetch('/api/user', {
+        fetch('/api/users', {
             method: "POST",
             headers: {
                 'Accept': 'application/json, text/plain, */*',

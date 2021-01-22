@@ -47,7 +47,7 @@ public class UserController {
         return new ResponseEntity<>(userList, headers, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/user")
+    @PostMapping(value = "/users")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> createUser(@RequestBody CreateUserDto createUserDto) {
         System.out.println("In method crateUser");
@@ -63,7 +63,7 @@ public class UserController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/user/{id}")
+    @PutMapping(value = "/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> updateUser(@RequestBody User user,
                                            @PathVariable(value = "id") Long id) {
@@ -74,7 +74,7 @@ public class UserController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(value = "/user/{id}")
+    @DeleteMapping(value = "/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Boolean> deleteUser(@PathVariable(value = "id") Long id) {
         if (userService.deleteUser(id))
@@ -82,7 +82,7 @@ public class UserController {
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/user/addBook")
+    @PutMapping(value = "/users/addBook")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> addBookToWishList(@RequestHeader("Book-id") Long bookId,
                                                   @RequestBody User user) {
