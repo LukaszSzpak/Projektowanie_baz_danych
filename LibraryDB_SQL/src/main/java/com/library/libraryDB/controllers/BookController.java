@@ -61,7 +61,7 @@ public class BookController {
     /*
     /book/addItem?bookId={bookId}&itemId={itemId}
      */
-    @GetMapping(value = "/book/addItem")
+    @GetMapping(value = "/books/addItem")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Book> addItemToBook(@RequestParam Map<Long, Long> bookAndItem) {
         Book tempBook = bookService.addItem(bookAndItem.get("bookId"), bookAndItem.get("itemId"));
@@ -71,7 +71,7 @@ public class BookController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(value = "/book/{id}")
+    @DeleteMapping(value = "/books/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Boolean> deleteBook(@PathVariable(value = "id") Long id) {
         if (bookService.deleteBookWithItems(id))
@@ -82,7 +82,7 @@ public class BookController {
     /*
     /book/changeAv?bookId={bookId}&avaliable={true/false}
      */
-    @GetMapping(value = "/book/changeAv")
+    @GetMapping(value = "/books/changeAv")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Boolean> changeAvaliable(@RequestParam Map<Long, Long> bookAndAvaliable) {
         boolean bookAvaliable = bookAndAvaliable.get("avaliable").equals("true");
@@ -92,7 +92,7 @@ public class BookController {
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/book/search={phrase}")
+    @GetMapping(value = "/books/search={phrase}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Book>> searchBook(@PathVariable(value = "phrase") String phrase) {
         return new ResponseEntity<>(bookService.searchBook(phrase), HttpStatus.OK);

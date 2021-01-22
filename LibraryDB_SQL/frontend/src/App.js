@@ -68,9 +68,7 @@ function App() {
         setId(value);
     }
 
-
     const dataProvider = simpleRestProvider('http://localhost:8080/api', httpClient);
-    const wishListProvider = simpleRestProvider('http://localhost:8080/api', httpClient);
 
   return (
     <div className="App">

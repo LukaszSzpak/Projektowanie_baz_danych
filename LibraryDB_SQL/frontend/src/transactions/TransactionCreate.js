@@ -22,7 +22,7 @@ const dateFormatter = v => {
   };
 
 
-export default function BookCreate(props) {
+export default function TransactionCreate(props) {
 
     return(
         <Create title='Create book' {...props}>
