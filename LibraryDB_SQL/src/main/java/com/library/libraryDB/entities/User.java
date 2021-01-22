@@ -3,6 +3,7 @@ package com.library.libraryDB.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -39,6 +40,8 @@ public class User implements Serializable {
         this.surname = surname;
         this.email = email;
         this.password = password;
+        this.wishList = new HashSet<>();
+        this.loanList = new HashSet<>();
     }
 
     public Long getId() {

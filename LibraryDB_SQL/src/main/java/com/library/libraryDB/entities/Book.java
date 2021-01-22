@@ -1,6 +1,7 @@
 package com.library.libraryDB.entities;
 
 import javax.persistence.*;
+import javax.print.attribute.HashPrintServiceAttributeSet;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,6 +41,8 @@ public class Book implements Serializable{
         this.title = title;
         this.author = author;
         this.description = description;
+        this.itemList = new HashSet<>();
+        this.userWishList = new HashSet<>();
     }
 
     public Long getId() {

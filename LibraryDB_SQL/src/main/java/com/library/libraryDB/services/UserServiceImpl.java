@@ -31,8 +31,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
+        System.out.println("hello");
         for (User tempUser: userRepository.findAll()) {
             if (tempUser.getEmail().equals(user.getEmail()))
+                System.out.println("===============>"+tempUser.getEmail().equals(user.getEmail()));
                 return null;
         }
         userRepository.save(user);
