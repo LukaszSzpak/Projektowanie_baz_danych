@@ -2,6 +2,7 @@ package com.library.libraryDB.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -35,6 +36,7 @@ public class Item implements Serializable {
         this.available = available;
         this.publishHouse = publishHouse;
         this.condition = condition;
+        this.loanList = new HashSet<>();
     }
 
     public Long getId() {

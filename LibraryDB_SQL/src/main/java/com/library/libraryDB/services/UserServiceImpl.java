@@ -31,12 +31,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        System.out.println("hello");
+        System.out.println("In method create user");
         for (User tempUser: userRepository.findAll()) {
+            System.out.println("User has unique id? "+tempUser.getEmail().equals(user.getEmail()));
             if (tempUser.getEmail().equals(user.getEmail()))
-                System.out.println("===============>"+tempUser.getEmail().equals(user.getEmail()));
                 return null;
         }
+        System.out.println("Saving user to repository");
         userRepository.save(user);
         return user;
     }
