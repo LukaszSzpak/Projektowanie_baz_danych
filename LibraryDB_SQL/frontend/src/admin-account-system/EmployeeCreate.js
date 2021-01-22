@@ -3,7 +3,7 @@ import {Create, SimpleForm, TextInput, SelectInput } from 'react-admin'
 
 export default function UserCreate(props) {
 
-    return(
+    return (
         <Create title='Create account' {...props}>
             <SimpleForm>
                 <TextInput source='name'/>
