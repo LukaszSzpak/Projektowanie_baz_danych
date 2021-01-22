@@ -11,5 +11,7 @@ public class AppRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         //Uncomment line below to erase DB and load sample data
+        //SampleData sampleData = new SampleData();
+        //sampleData.createSampleData();
     }
 }

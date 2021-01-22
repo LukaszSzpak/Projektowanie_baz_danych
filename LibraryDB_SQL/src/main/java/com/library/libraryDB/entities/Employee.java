@@ -20,8 +20,8 @@ public class Employee implements Serializable {
     @Column(nullable = false)
     private String surname;
 
-    @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private EmployeeType role;
 
     @Column(nullable = false)
     private String password;
@@ -29,7 +29,7 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "employee")
     private Set<Loan> loanList;
 
-    public Employee(Long id, String email, String name, String surname, String role, String password) {
+    public Employee(Long id, String email, String name, String surname, EmployeeType role, String password) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -65,11 +65,11 @@ public class Employee implements Serializable {
         return surname;
     }
 
-    public String getRole() {
+    public EmployeeType getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(EmployeeType role) {
         this.role = role;
     }
 

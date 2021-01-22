@@ -75,10 +75,11 @@ public class CreateUserDto {
      */
     public User parseToUser(UserService userService) {
         List<User> userList = userService.getAllUsers();
-        long lastId = 0;
+        long lastId = -1L;
         if (userList.size() > 0) {
             lastId = userList.get(userList.size() - 1).getId();
         }
+        System.out.println("lalalallalalalalallalalalala" + lastId);
 
         return new User(lastId + 1, this.name, this.surname, this.email, this.password);
     }

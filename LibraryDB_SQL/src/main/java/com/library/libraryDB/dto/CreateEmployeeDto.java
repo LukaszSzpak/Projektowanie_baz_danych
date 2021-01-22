@@ -1,6 +1,7 @@
 package com.library.libraryDB.dto;
 
 import com.library.libraryDB.entities.Employee;
+import com.library.libraryDB.entities.EmployeeType;
 import com.library.libraryDB.services.Interfaces.EmployeeService;
 
 import java.util.List;
@@ -71,6 +72,6 @@ public class CreateEmployeeDto {
         }
 
         return new Employee(lastId + 1, this.getEmail(), this.getName(), this.getSurname(),
-                this.getRole(), this.getPassword());
+                EmployeeType.valueOf(this.getRole().toUpperCase()), this.getPassword());
     }
 }
