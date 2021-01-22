@@ -28,7 +28,7 @@ public class Book implements Serializable{
 
     @OneToMany(mappedBy = "book")
     private Set<Item> itemList;
-
+    
     @ManyToMany
     private Set<User> userWishList;
 

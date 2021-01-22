@@ -39,6 +39,7 @@ public class UserController {
     @GetMapping(value = "/users")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<User>> listAllUsers() {
+        System.out.println("wfefwe");
         List<User> userList = userService.getAllUsers();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=UTF-8");
