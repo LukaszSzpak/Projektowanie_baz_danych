@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface BookService {
     Book addItem(Long id, Long itemId);
-    List<Item> getItemList(Long id);
+    List<Long> getItemList(Long id);
     Book getBook(Long id);
     List<Book> getBooks();
     Book createBook(CreateBookDto createBookDto);

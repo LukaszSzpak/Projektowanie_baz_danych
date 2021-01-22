@@ -8,6 +8,8 @@ import com.library.libraryDB.repositories.ItemRepository;
 import com.library.libraryDB.services.Interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -33,9 +35,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Item> getItemList(Long id) {
-        if (bookRepository.findById(id).isPresent())
-            return bookRepository.findById(id).get().getItemList();
+    public List<Long> getItemList(Long id) {
+        if (bookRepository.findById(id).isPresent()) {
+            List<Long> resultList = new LinkedList<>();
+            for (Item item: bookRepository.findById(id).get().getItemList()) {
+                resultList.add(item.getId());
+            }
+            return resultList;
+        }
         return null;
     }
 

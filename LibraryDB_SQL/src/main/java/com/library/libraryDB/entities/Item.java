@@ -22,7 +22,6 @@ public class Item implements Serializable {
     private String condition;
 
     @ManyToOne
-    @JoinColumn(name="book_id")
     private Book book;
 
     @OneToMany(mappedBy = "item")
