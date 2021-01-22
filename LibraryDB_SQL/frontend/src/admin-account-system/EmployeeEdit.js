@@ -11,8 +11,8 @@ export default function AccountEdit(props) {
                 <TextInput source='surname'/>
                 <TextInput source='email'/>
                 <SelectInput source="role" choices={[
-                    { id: 'admin', name: 'ADMIN' },
-                    { id: 'librarian', name: 'LIBRARIAN' },
+                    { id: 'ADMIN', name: 'ADMIN' },
+                    { id: 'LIBRARIAN', name: 'LIBRARIAN' },
                 ]} />
             </SimpleForm>
         </Edit>
