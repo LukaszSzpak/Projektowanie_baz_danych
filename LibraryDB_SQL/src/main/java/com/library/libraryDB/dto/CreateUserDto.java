@@ -75,7 +75,7 @@ public class CreateUserDto {
      */
     public User parseToUser(UserService userService) {
         List<User> userList = userService.getAllUsers();
-        long lastId = 1;
+        long lastId = 0;
         if (userList.size() > 0) {
             lastId = userList.get(userList.size() - 1).getId();
         }
