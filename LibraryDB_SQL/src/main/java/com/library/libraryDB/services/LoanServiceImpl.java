@@ -7,10 +7,7 @@ import com.library.libraryDB.entities.Loan;
 import com.library.libraryDB.repositories.BookRepository;
 import com.library.libraryDB.repositories.ItemRepository;
 import com.library.libraryDB.repositories.LoanRepository;
-import com.library.libraryDB.services.Interfaces.EmployeeService;
-import com.library.libraryDB.services.Interfaces.ItemService;
-import com.library.libraryDB.services.Interfaces.LoanService;
-import com.library.libraryDB.services.Interfaces.UserService;
+import com.library.libraryDB.services.Interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +26,12 @@ public class LoanServiceImpl implements LoanService {
     @Autowired
     private ItemRepository itemRepository;
 
-    //????????????????????
-    private UserService userService;
-    private EmployeeService employeeService;
+    @Autowired
     private ItemService itemService;
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    private UserService userService;
 
 
     @Override
@@ -50,7 +49,10 @@ public class LoanServiceImpl implements LoanService {
                 maxId = loan.getId();
         }
 
-        Loan tempLoan = createLoanDto.makeLoan(maxId + 1, userService, employeeService, itemService);
+        Loan tempLoan = createLoanDto.makeLoan(maxId + 1,
+                this.userService.getUserById(createLoanDto.getUserId()),
+                this.employeeService.getEmployeeById(createLoanDto.getEmployeeId()),
+                this.itemService.getItem(createLoanDto.getBookId()));
         checkBookAndItemAvailable(tempLoan);
         loanRepository.save(tempLoan);
 

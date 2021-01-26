@@ -62,5 +62,5 @@ VALUES (4, 1, 'Bardzo dobry', 'Czwarta Strona', 2);
 
 INSERT INTO loan (id, additional_cost, date_planning_return, days_after_return_date, is_back,
                     rent_date, employee_id, item_id, user_id)
-VALUES (4, 0, TO_TIMESTAMP('2021-01-30 0:00:00.000000', 'YYYY-MM-DD HH24:MI:SS.FF'), 0, 0,
+VALUES (0, 0, TO_TIMESTAMP('2021-01-30 0:00:00.000000', 'YYYY-MM-DD HH24:MI:SS.FF'), 0, 0,
     TO_TIMESTAMP('2021-02-15 0:00:00.000000', 'YYYY-MM-DD HH24:MI:SS.FF'), 1, 3, 0);

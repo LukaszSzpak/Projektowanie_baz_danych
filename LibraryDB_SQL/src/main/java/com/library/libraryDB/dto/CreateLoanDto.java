@@ -7,6 +7,8 @@ import com.library.libraryDB.entities.User;
 import com.library.libraryDB.services.Interfaces.ItemService;
 import com.library.libraryDB.services.Interfaces.UserService;
 import com.library.libraryDB.services.Interfaces.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -86,11 +88,7 @@ public class CreateLoanDto {
     }
      */
 
-    public Loan makeLoan(Long id, UserService userService, EmployeeService employeeService, ItemService itemService) {
-        User user = userService.getUserById(this.userId);
-        Employee emp = employeeService.getEmployeeById(this.employeeId);
-        Item item = itemService.getItem(this.itemId);
-
-        return new Loan(id, this.rentDate, this.datePlanningReturn, emp, user, item);
+    public Loan makeLoan(Long id, User user, Employee employee, Item item) {
+        return new Loan(id, this.rentDate, this.datePlanningReturn, employee, user, item);
     }
 }
