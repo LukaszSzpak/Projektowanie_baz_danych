@@ -28,6 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             Employee tempEmployee = employeeRepository.findById(id).get();
             tempEmployee.setName(employee.getName());
             tempEmployee.setSurname(employee.getSurname());
+            tempEmployee.setEmail(employee.getEmail());
             tempEmployee.setRole(employee.getRole());
             employeeRepository.save(tempEmployee);
 

@@ -17,6 +17,7 @@ const EmployeeList = (props) => (
         <Datagrid>
             <TextField source='name'/>
             <TextField source='surname'/>
+            <TextField source='email'/>
             <TextField source='role'/>
             <EditButton basePath='/employees'/>
             <DeleteButton basePath='/employees' />

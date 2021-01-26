@@ -68,53 +68,42 @@ function App() {
         setId(value);
     }
 
-    const dataProvider = simpleRestProvider('http://localhost:8080/api', httpClient);
+    const dataProvider = simpleRestProvider('http://localhost:8080/api/', httpClient);
 
   return (
     <div className="App">
-      <Switch>
+    <BrowserRouter>
+    <Switch>
 
-      <Route exact path='/login'>
-        <Login setEmail={handleEmailChange} setRole={handleRoleChange} setId={handleIdChange}/>
-      </Route>
+    <Route exact path='/login'>
+      <Login setEmail={handleEmailChange} setRole={handleRoleChange} setId={handleIdChange}/>
+    </Route>
 
-      <Route exact path='/register'>
-        <Register/>
-      </Route>
+    <Route exact path='/register'>
+      <Register/>
+    </Route>
 
-      <Route exact path='/librarian'>
-        <LibrarianMenu/>
-      </Route>
+    <Route exact path='/home'>
+      <div>
+        <GetPanel role = {role} dataProvider = {dataProvider}/>
+      </div>
+    </Route>
 
-      <Route exact path='/admin'>
-        <AdminMenu />
-      </Route>
-
-      <Route exact path='/home'>
-        <div>
-          <GetPanel role = {role} dataProvider = {dataProvider}/>
-        </div>
-      </Route>
-
-      <Route exact path='/'>
-        <div>
-          <Admin dataProvider={dataProvider}>
-            <Resource name="books" list = {AdminBookList} create={BookCreate} edit={BookEdit} />
-            <Resource name="users" list = {UserList} create={UserCreate} edit={UserEdit} />
-            <Resource name="employees" list = {EmployeeList} create={EmployeeCreate} edit={EmployeeEdit} />
-            <Resource name="loans" list = {AdminTransactionList} create={TransactionCreate} edit={TransactionEdit} />
-          </Admin>
-        </div>
-      </Route>
-      
-    </Switch>
+    <Route exact path='/'>
+      <div>
+        <LoginView></LoginView>
+      </div>
+    </Route>
+    
+  </Switch>
+    </BrowserRouter>
   </div>
   );
 }
 
 
 function GetPanel(props) {
-  if (props.role === 'admin') {
+  if (props.role === 'ADMIN') {
     return (
     <Admin dataProvider={props.dataProvider}>
       <Resource name="books" list = {AdminBookList} create={BookCreate} edit={BookEdit} />
@@ -131,7 +120,7 @@ function GetPanel(props) {
         <Resource name="loans" list = {TransactionList} />
       </Admin>)
     }
-    else if (props.role === 'librarian') {
+    else if (props.role === 'LIBRARIAN') {
       return (
       <Admin dataProvider={props.dataProvider}>
         <Resource name="books" list = {AdminBookList} create={BookCreate} edit={BookEdit} />
