@@ -1,10 +1,13 @@
 package com.library.libraryDB.services;
 
 import com.library.libraryDB.dto.CreateBookDto;
+import com.library.libraryDB.entities.Author;
 import com.library.libraryDB.entities.Book;
 import com.library.libraryDB.entities.Item;
+import com.library.libraryDB.repositories.AuthorRepository;
 import com.library.libraryDB.repositories.BookRepository;
 import com.library.libraryDB.repositories.ItemRepository;
+import com.library.libraryDB.repositories.PublishHouseRepository;
 import com.library.libraryDB.services.Interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,12 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private AuthorRepository authorRepository;
+
+    @Autowired
+    private PublishHouseRepository publishHouseRepository;
 
     @Override
     public Book addItem(Long id, Long itemId) {
@@ -61,13 +70,23 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book createBook(CreateBookDto createBookDto) {
+        String author = createBookDto.getAuthor();
+        Author authorObj = null;
+
+        if (this.authorRepository.existsAuthorByName(author)) {
+            authorObj = this.authorRepository.findAuthorByName(author);
+        } else {
+            this.authorRepository.save(new Author(null, author));
+            authorObj = this.authorRepository.findAuthorByName(author);
+        }
+
         Long maxId = (long) -1;
         for(Book book : bookRepository.findAll()) {
             if (book.getId() > maxId)
                 maxId = book.getId();
         }
 
-        Book tempBook = createBookDto.makeBook(maxId + 1);
+        Book tempBook = createBookDto.makeBook(maxId + 1, authorObj);
         bookRepository.save(tempBook);
         return tempBook;
     }

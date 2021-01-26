@@ -1,6 +1,7 @@
 package com.library.libraryDB.dto;
 
 import com.library.libraryDB.entities.Item;
+import com.library.libraryDB.entities.PublishHouse;
 
 public class CreateItemDto {
     private String publishHouse;
@@ -30,7 +31,7 @@ public class CreateItemDto {
         this.condition = condition;
     }
 
-    public Item createItemFromDto(Long id) {
-        return new Item(id, true, this.publishHouse, this.condition);
+    public Item createItemFromDto(Long id, PublishHouse publishHouse) {
+        return new Item(id, true, publishHouse, this.condition);
     }
 }

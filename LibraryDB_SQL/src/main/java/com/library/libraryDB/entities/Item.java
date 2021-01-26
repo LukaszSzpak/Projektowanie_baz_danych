@@ -15,8 +15,8 @@ public class Item implements Serializable {
     @Column
     private boolean available = true;
 
-    @Column(nullable = false)
-    private String publishHouse;
+    @ManyToOne
+    private PublishHouse publishHouse;
 
     @Column(nullable = false)
     private String condition;
@@ -30,7 +30,7 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(Long id, boolean available, String publishHouse, String condition) {
+    public Item(Long id, boolean available, PublishHouse publishHouse, String condition) {
         this.id = id;
         this.available = available;
         this.publishHouse = publishHouse;
@@ -50,7 +50,7 @@ public class Item implements Serializable {
         return available;
     }
 
-    public String getPublishHouse() {
+    public PublishHouse getPublishHouse() {
         return publishHouse;
     }
 
@@ -62,7 +62,7 @@ public class Item implements Serializable {
         this.available = available;
     }
 
-    public void setPublishHouse(String publishHouse) {
+    public void setPublishHouse(PublishHouse publishHouse) {
         this.publishHouse = publishHouse;
     }
 
