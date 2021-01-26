@@ -19,9 +19,6 @@ public class Book implements Serializable{
     private String title;
 
     @Column(nullable = false)
-    private String author;
-
-    @Column(nullable = false)
     private String description;
 
     @Column
@@ -33,10 +30,13 @@ public class Book implements Serializable{
     @ManyToMany
     private Set<User> userWishList;
 
+    @ManyToOne
+    private Author author;
+
     public Book() {
     }
 
-    public Book(Long id, String title, String author, String description) {
+    public Book(Long id, String title, Author author, String description) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -53,7 +53,7 @@ public class Book implements Serializable{
         return title;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
@@ -69,7 +69,7 @@ public class Book implements Serializable{
         this.title = title;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

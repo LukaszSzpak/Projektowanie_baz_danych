@@ -1,5 +1,6 @@
 package com.library.libraryDB.dto;
 
+import com.library.libraryDB.entities.Author;
 import com.library.libraryDB.entities.Book;
 
 public class CreateBookDto {
@@ -40,7 +41,7 @@ public class CreateBookDto {
         this.description = description;
     }
 
-    public Book makeBook(Long id) {
-        return new Book(id, this.title, this.author, this.description);
+    public Book makeBook(Long id, Author author) {
+        return new Book(id, this.title, author, this.description);
     }
 }

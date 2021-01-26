@@ -1,17 +1,26 @@
+create table author (
+   id bigint not null,
+    name varchar(255) not null,
+    primary key (id)
+);
+
+
 create table book (
    id bigint not null,
-    author varchar(255) not null,
     available boolean,
     description varchar(255) not null,
     title varchar(255) not null,
+    author_id bigint,
     primary key (id)
 );
+
 
 create table book_user_wish_list (
    wish_list_id bigint not null,
     user_wish_list_id bigint not null,
     primary key (wish_list_id, user_wish_list_id)
 );
+
 
 create table employee (
    id bigint not null,
@@ -27,10 +36,11 @@ create table item (
    id bigint not null,
     available boolean,
     condition varchar(255) not null,
-    publish_house varchar(255) not null,
     book_id bigint,
+    publish_house_id bigint,
     primary key (id)
 );
+
 
 create table loan (
    id bigint not null,
@@ -45,6 +55,14 @@ create table loan (
     primary key (id)
 );
 
+
+create table publish_house (
+   id bigint not null,
+    name varchar(255) not null,
+    primary key (id)
+);
+
+
 create table user (
    id bigint not null,
     email varchar(255) not null,
@@ -54,7 +72,29 @@ create table user (
     primary key (id)
 );
 
+
+alter table author
+   drop constraint if exists UK_or6k6jmywerxbme223c988bmg;
+
+
+alter table author
+   add constraint UK_or6k6jmywerxbme223c988bmg unique (name);
+
+
+alter table publish_house
+   drop constraint if exists UK_pvaci3qwv3uqr51ambyxhf2be;
+
+
+alter table publish_house
+   add constraint UK_pvaci3qwv3uqr51ambyxhf2be unique (name);
+
 create sequence hibernate_sequence start with 1 increment by 1;
+
+
+alter table book
+   add constraint FKklnrv3weler2ftkweewlky958
+   foreign key (author_id)
+   references author;
 
 alter table book_user_wish_list
    add constraint FKcr7kns4cevie2at7at8cj335h
@@ -71,15 +111,23 @@ alter table item
    foreign key (book_id)
    references book;
 
+alter table item
+   add constraint FKgqn511smm8tgxd5wl4t6s6e5v
+   foreign key (publish_house_id)
+   references publish_house;
+
+
 alter table loan
    add constraint FKldelgmf98lfdsspa79vo5syqb
    foreign key (employee_id)
    references employee;
 
+
 alter table loan
    add constraint FKn8knyhu6lqb2prwx5bqp9bm37
    foreign key (item_id)
    references item;
+
 
 alter table loan
    add constraint FKxxm1yc1xty3qn1pthgj8ac4f
